@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sierra Linda | Exportadora de Quinua Ayacucho, Perú</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --oro: #C8922A;
+    --oro-light: #E8C97A;
+    --tierra: #8B5E3C;
+    --verde: #4A6741;
+    --verde-dark: #2E4228;
+    --crema: #F5EDD8;
+    --crema-dark: #E8D9B8;
+    --blanco: #FDFAF4;
+    --gris: #6B6560;
+    --negro: #1A1410;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blanco);
+    color: var(--negro);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5%;
+    background: rgba(253,250,244,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(200,146,42,0.15);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem; font-weight: 600; letter-spacing: 0.04em;
+    color: var(--verde-dark); text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--oro); }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+  .nav-links a {
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--gris);
+    text-decoration: none; transition: color .25s;
+  }
+
+  .nav-links a:hover { color: var(--verde); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 7rem 5% 4rem;
+    background: var(--crema);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 520px; height: 520px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(74,103,65,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  #hero::after {
+    content: '';
+    position: absolute; bottom: -40px; left: 20%;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,146,42,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-text { position: relative; z-index: 1; }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--oro);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-eyebrow::before {
+    content: ''; width: 32px; height: 1px; background: var(--oro);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--verde-dark);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title em { font-style: italic; color: var(--oro); }
+
+  .hero-subtitle {
+    font-size: 1rem; color: var(--gris); line-height: 1.8;
+    max-width: 440px; margin-bottom: 2.5rem;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 0.85rem 2.2rem;
+    background: var(--verde-dark);
+    color: var(--crema);
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; text-decoration: none;
+    border: none; cursor: pointer;
+    transition: background .25s, transform .2s;
+  }
+
+  .btn-primary:hover { background: var(--verde); transform: translateY(-2px); }
+
+  .btn-outline {
+    display: inline-block;
+    padding: 0.85rem 2.2rem;
+    border: 1.5px solid var(--verde-dark);
+    color: var(--verde-dark);
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; text-decoration: none;
+    transition: all .25s;
+    margin-left: 1rem;
+  }
+
+  .btn-outline:hover { background: var(--verde-dark); color: var(--crema); }
+
+  .hero-visual {
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+
+  .hero-badge-ring {
+    width: 400px; height: 400px; border-radius: 50%;
+    border: 2px solid rgba(200,146,42,0.3);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    animation: rotateSlow 30s linear infinite;
+  }
+
+  @keyframes rotateSlow { to { transform: rotate(360deg); } }
+
+  .hero-badge-inner {
+    width: 300px; height: 300px; border-radius: 50%;
+    background: var(--verde-dark);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    animation: rotateSlow 30s linear infinite reverse;
+    text-align: center; padding: 2rem;
+  }
+
+  .badge-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 300; color: var(--oro-light);
+    line-height: 1; margin-bottom: 0.5rem;
+  }
+
+  .badge-sub {
+    font-size: 0.7rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(245,237,216,0.7);
+  }
+
+  .badge-icon {
+    font-size: 1.8rem; margin-bottom: 0.8rem;
+  }
+
+  .orbit-dot {
+    position: absolute; width: 12px; height: 12px;
+    border-radius: 50%; background: var(--oro);
+  }
+
+  .orbit-dot:nth-child(1) { top: -6px; left: 50%; transform: translateX(-50%); }
+  .orbit-dot:nth-child(2) { bottom: -6px; left: 50%; transform: translateX(-50%); }
+  .orbit-dot:nth-child(3) { left: -6px; top: 50%; transform: translateY(-50%); }
+
+  .hero-stats {
+    position: absolute; bottom: -30px; left: 0; right: 0;
+    display: flex; justify-content: center; gap: 3rem;
+    padding: 1.5rem 5%;
+  }
+
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 600; color: var(--verde-dark);
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.72rem; color: var(--gris);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  /* ── SECTIONS COMMON ── */
+  section { padding: 6rem 5%; }
+
+  .section-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--oro);
+    margin-bottom: 1rem;
+  }
+
+  .section-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--oro); }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300; line-height: 1.15;
+    color: var(--verde-dark);
+  }
+
+  /* ── QUIÉNES SOMOS ── */
+  #nosotros {
+    background: var(--blanco);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    color: var(--gris); line-height: 1.9; margin-bottom: 1.2rem;
+    font-size: 0.97rem;
+  }
+
+  .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+
+  .mv-card {
+    padding: 2rem;
+    border: 1px solid var(--crema-dark);
+    position: relative; overflow: hidden;
+  }
+
+  .mv-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--verde);
+  }
+
+  .mv-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; color: var(--verde-dark);
+    margin-bottom: 0.8rem; font-weight: 600;
+  }
+
+  .mv-card p { font-size: 0.88rem; color: var(--gris); line-height: 1.8; }
+
+  .about-visual {
+    position: relative; display: flex; align-items: center; justify-content: center;
+  }
+
+  .about-box-main {
+    width: 320px; height: 380px;
+    background: var(--verde-dark);
+    display: flex; align-items: flex-end;
+    padding: 2.5rem;
+    position: relative; z-index: 1;
+  }
+
+  .about-box-main p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 300; color: var(--crema);
+    font-style: italic; line-height: 1.4;
+  }
+
+  .about-box-accent {
+    position: absolute; bottom: -1.5rem; right: -1.5rem;
+    width: 180px; height: 180px;
+    background: var(--oro);
+    display: flex; align-items: center; justify-content: center; z-index: 0;
+  }
+
+  .about-box-accent span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; color: rgba(255,255,255,0.3); font-weight: 600;
+  }
+
+  .about-box-top {
+    position: absolute; top: -1.5rem; left: -1.5rem;
+    width: 120px; height: 120px;
+    border: 2px solid var(--oro);
+    z-index: 2;
+  }
+
+  /* ── PROCESO ── */
+  #proceso { background: var(--verde-dark); }
+
+  #proceso .section-eyebrow { color: var(--oro-light); }
+  #proceso .section-eyebrow::before { background: var(--oro-light); }
+  #proceso .section-title { color: var(--crema); }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0; margin-top: 4rem;
+    position: relative;
+  }
+
+  .process-grid::before {
+    content: '';
+    position: absolute; top: 50px; left: 10%; right: 10%;
+    height: 1px; background: rgba(200,146,42,0.4);
+    z-index: 0;
+  }
+
+  .process-step {
+    display: flex; flex-direction: column;
+    align-items: center; text-align: center;
+    padding: 0 1rem; position: relative; z-index: 1;
+  }
+
+  .step-num {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--oro);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 600; color: var(--verde-dark);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 0 8px rgba(200,146,42,0.15);
+  }
+
+  .step-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+
+  .process-step h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem; color: var(--crema); margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .process-step p {
+    font-size: 0.8rem; color: rgba(245,237,216,0.65); line-height: 1.7;
+  }
+
+  /* ── PRODUCTOS ── */
+  #productos { background: var(--crema); }
+
+  .quinua-intro {
+    max-width: 600px; margin-bottom: 3rem;
+  }
+
+  .quinua-intro p { color: var(--gris); font-size: 0.97rem; line-height: 1.9; margin-top: 1rem; }
+
+  .quinua-tabs {
+    display: flex; gap: 0; margin-bottom: 3rem;
+    border-bottom: 2px solid var(--crema-dark);
+  }
+
+  .tab-btn {
+    padding: 1rem 2rem;
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: none; border: none; cursor: pointer;
+    color: var(--gris);
+    transition: all .2s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+  }
+
+  .tab-btn.active { color: var(--verde-dark); border-bottom-color: var(--verde-dark); }
+  .tab-btn:hover { color: var(--verde); }
+
+  .quinua-panel { display: none; }
+  .quinua-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+
+  .quinua-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; color: var(--verde-dark);
+    font-weight: 300; margin-bottom: 0.5rem;
+  }
+
+  .quinua-variety-badge {
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+
+  .badge-blanca { background: rgba(200,146,42,0.15); color: var(--oro); }
+  .badge-roja { background: rgba(180,60,40,0.12); color: #8B3020; }
+  .badge-negra { background: rgba(30,30,30,0.1); color: #333; }
+
+  .quinua-desc {
+    font-size: 0.93rem; color: var(--gris); line-height: 1.9; margin-bottom: 2rem;
+  }
+
+  .nutri-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .nutri-card {
+    background: var(--blanco);
+    padding: 1.2rem;
+    text-align: center;
+    border-bottom: 3px solid var(--verde);
+  }
+
+  .nutri-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 600; color: var(--verde-dark);
+    display: block;
+  }
+
+  .nutri-unit {
+    font-size: 0.7rem; color: var(--gris); text-transform: uppercase; letter-spacing: 0.08em;
+  }
+
+  .nutri-name {
+    font-size: 0.78rem; color: var(--gris); margin-top: 0.3rem; display: block;
+  }
+
+  .nutri-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+  .nutri-table td { padding: 0.6rem 0; border-bottom: 1px solid var(--crema-dark); color: var(--gris); }
+  .nutri-table td:last-child { text-align: right; font-weight: 500; color: var(--verde-dark); }
+
+  .quinua-visual-box {
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+
+  .quinua-img-placeholder {
+    height: 280px;
+    background: var(--verde-dark);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 1rem;
+    position: relative; overflow: hidden;
+  }
+
+  .quinua-img-placeholder::before {
+    content: '';
+    position: absolute; top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 15px,
+      rgba(255,255,255,0.03) 15px,
+      rgba(255,255,255,0.03) 16px
+    );
+  }
+
+  .q-img-icon { font-size: 4rem; }
+  .q-img-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; color: var(--crema); font-style: italic;
+  }
+
+  .quinua-origin {
+    padding: 1.5rem 2rem;
+    background: var(--blanco);
+    border-left: 3px solid var(--oro);
+  }
+
+  .quinua-origin h4 {
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--oro); margin-bottom: 0.5rem;
+  }
+
+  .quinua-origin p { font-size: 0.88rem; color: var(--gris); line-height: 1.7; }
+
+  /* ── CERTIFICACIONES ── */
+  #certificaciones { background: var(--blanco); }
+
+  .cert-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem;
+  }
+
+  .cert-card {
+    padding: 2.5rem 1.5rem; text-align: center;
+    border: 1px solid var(--crema-dark);
+    transition: border-color .25s, transform .2s;
+  }
+
+  .cert-card:hover { border-color: var(--verde); transform: translateY(-4px); }
+
+  .cert-icon { font-size: 3rem; margin-bottom: 1rem; }
+
+  .cert-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; color: var(--verde-dark); margin-bottom: 0.5rem;
+  }
+
+  .cert-card p { font-size: 0.82rem; color: var(--gris); line-height: 1.6; }
+
+  .cert-note {
+    margin-top: 2rem;
+    padding: 1rem 1.5rem;
+    background: var(--crema);
+    border-left: 3px solid var(--oro);
+    font-size: 0.85rem; color: var(--gris);
+  }
+
+  /* ── CONTACTO ── */
+  #contacto { background: var(--crema); }
+
+  .contact-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; margin-top: 3rem; }
+
+  .contact-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; color: var(--verde-dark); margin-bottom: 1rem;
+    font-weight: 400;
+  }
+
+  .contact-info p { font-size: 0.93rem; color: var(--gris); line-height: 1.9; margin-bottom: 1.5rem; }
+
+  .contact-detail {
+    display: flex; align-items: flex-start; gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .contact-detail-icon {
+    width: 40px; height: 40px; background: var(--verde-dark);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+  }
+
+  .contact-detail-text small {
+    display: block; font-size: 0.7rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--oro); margin-bottom: 0.2rem;
+  }
+
+  .contact-detail-text p { font-size: 0.9rem; color: var(--negro); margin: 0; }
+
+  .contact-form { background: var(--blanco); padding: 3rem; }
+
+  .form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; color: var(--verde-dark);
+    margin-bottom: 2rem; font-weight: 400;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-group { margin-bottom: 1.2rem; }
+
+  .form-group label {
+    display: block; font-size: 0.72rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gris); margin-bottom: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%; padding: 0.85rem 1rem;
+    border: 1px solid var(--crema-dark);
+    background: var(--blanco); color: var(--negro);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; outline: none;
+    transition: border-color .2s;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--verde);
+  }
+
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .form-group select { appearance: none; cursor: pointer; }
+
+  .btn-whatsapp {
+    width: 100%; padding: 1rem;
+    background: #25D366; color: #fff;
+    border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 500; letter-spacing: 0.05em;
+    display: flex; align-items: center; justify-content: center; gap: 0.7rem;
+    transition: background .25s, transform .2s;
+  }
+
+  .btn-whatsapp:hover { background: #128C7E; transform: translateY(-2px); }
+
+  .whatsapp-note {
+    text-align: center; font-size: 0.75rem; color: var(--gris);
+    margin-top: 0.8rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--verde-dark);
+    padding: 4rem 5% 2rem;
+  }
+
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(245,237,216,0.15);
+  }
+
+  .footer-brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; color: var(--crema); font-weight: 300;
+    margin-bottom: 0.8rem;
+  }
+
+  .footer-brand-name span { color: var(--oro-light); }
+
+  .footer-desc { font-size: 0.85rem; color: rgba(245,237,216,0.6); line-height: 1.8; }
+
+  .footer-col h5 {
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--oro-light); margin-bottom: 1.2rem;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.6rem; }
+  .footer-col ul li a {
+    font-size: 0.85rem; color: rgba(245,237,216,0.65);
+    text-decoration: none; transition: color .2s;
+  }
+  .footer-col ul li a:hover { color: var(--crema); }
+
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 2rem;
+    font-size: 0.78rem; color: rgba(245,237,216,0.4);
+  }
+
+  .footer-bottom a { color: var(--oro-light); text-decoration: none; }
+
+  /* ── WHATSAPP FLOAT ── */
+  .wa-float {
+    position: fixed; bottom: 2rem; right: 2rem;
+    z-index: 999;
+    width: 58px; height: 58px; border-radius: 50%;
+    background: #25D366;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    text-decoration: none;
+    transition: transform .25s;
+    animation: pulse 2.5s infinite;
+  }
+
+  .wa-float:hover { transform: scale(1.1); }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 4px 30px rgba(37,211,102,0.7); }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    #hero { grid-template-columns: 1fr; padding: 6rem 5% 3rem; }
+    .hero-visual { display: none; }
+    #nosotros, .contact-layout, .quinua-panel.active { grid-template-columns: 1fr; }
+    .process-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .process-grid::before { display: none; }
+    .cert-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    nav { padding: 1rem 5%; }
+    .nav-links { display: none; }
+    .btn-outline { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- WhatsApp flotante -->
+<a class="wa-float" href="https://wa.me/51XXXXXXXXX?text=Hola,%20me%20interesa%20cotizar%20quinua%20de%20Sierra%20Linda" target="_blank" title="Cotizar por WhatsApp">📱</a>
+
+<!-- NAVEGACIÓN -->
+<nav>
+  <a class="nav-logo" href="#hero">Sierra <span>Linda</span></a>
+  <ul class="nav-links">
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#certificaciones">Certificaciones</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a class="btn-primary" href="#contacto">Cotizar ahora</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text reveal">
+    <div class="hero-eyebrow">Ayacucho · Perú · Desde los Andes</div>
+    <h1 class="hero-title">
+      Quinua peruana<br>
+      de <em>alta pureza</em><br>
+      para el mundo
+    </h1>
+    <p class="hero-subtitle">
+      Sierra Linda es una empresa ayacuchana comprometida con la exportación de quinua premium en sus tres variedades, llevando lo mejor de los Andes peruanos a los mercados internacionales.
+    </p>
+    <a class="btn-primary" href="#productos">Ver nuestros productos</a>
+    <a class="btn-outline" href="#contacto">Solicitar cotización</a>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-badge-ring">
+      <div class="orbit-dot"></div>
+      <div class="orbit-dot"></div>
+      <div class="orbit-dot"></div>
+      <div class="hero-badge-inner">
+        <div class="badge-icon">🌾</div>
+        <div class="badge-title">Sierra<br>Linda</div>
+        <div class="badge-sub">Quinua Ayacuchana</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIÉNES SOMOS -->
+<section id="nosotros">
+  <div class="about-text">
+    <div class="section-eyebrow">Quiénes somos</div>
+    <h2 class="section-title reveal">Raíces andinas,<br>proyección global</h2>
+
+    <div style="margin-top:2rem">
+      <p class="reveal">Sierra Linda nació en Ayacucho, el corazón de los Andes peruanos, con una misión clara: llevar la quinua de mejor calidad a los mercados internacionales más exigentes. Trabajamos directamente con agricultores locales para asegurar trazabilidad, calidad y desarrollo sostenible en cada lote.</p>
+      <p class="reveal">Nuestra empresa combina el conocimiento ancestral del cultivo de quinua con estándares modernos de procesamiento y exportación, garantizando un producto que cumple con los requisitos de mercados de Estados Unidos, Europa y Asia.</p>
+    </div>
+
+    <div class="mv-grid">
+      <div class="mv-card reveal">
+        <h3>🎯 Misión</h3>
+        <p>Exportar quinua ayacuchana de alta calidad, conectando a los agricultores andinos con mercados internacionales, generando valor económico y social en nuestra región.</p>
+      </div>
+      <div class="mv-card reveal">
+        <h3>🔭 Visión</h3>
+        <p>Ser el referente peruano de exportación de superalimentos andinos para el 2030, reconocidos globalmente por nuestra calidad, trazabilidad y compromiso con el desarrollo sostenible.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-visual reveal">
+    <div class="about-box-top"></div>
+    <div class="about-box-main">
+      <p>"Del campo ayacuchano a la mesa del mundo"</p>
+    </div>
+    <div class="about-box-accent"><span>🌾</span></div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso">
+  <div class="section-eyebrow">Nuestro proceso</div>
+  <h2 class="section-title reveal">De la sierra al<br>mercado internacional</h2>
+
+  <div class="process-grid">
+    <div class="process-step reveal">
+      <div class="step-num">1</div>
+      <div class="step-icon">🌱</div>
+      <h4>Cultivo</h4>
+      <p>Trabajamos con agricultores de Ayacucho, cultivando quinua a más de 3,000 m.s.n.m. bajo prácticas sostenibles y libres de pesticidas.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-num">2</div>
+      <div class="step-icon">🏔️</div>
+      <h4>Cosecha</h4>
+      <p>Recolección manual en el momento óptimo de madurez para preservar el perfil nutricional completo de cada variedad.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-num">3</div>
+      <div class="step-icon">⚙️</div>
+      <h4>Procesamiento</h4>
+      <p>Selección, limpieza y escarificación en planta certificada. Control de calidad en cada etapa bajo normas internacionales.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-num">4</div>
+      <div class="step-icon">📦</div>
+      <h4>Empaque</h4>
+      <p>Empaque en presentaciones de 25 kg, 50 kg y a granel, con etiquetado según normativa del país de destino.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-num">5</div>
+      <div class="step-icon">✈️</div>
+      <h4>Exportación</h4>
+      <p>Gestión logística completa: documentación, certificados fitosanitarios y coordinación con operadores de carga internacional.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTOS -->
+<section id="productos">
+  <div class="quinua-intro">
+    <div class="section-eyebrow">Nuestros productos</div>
+    <h2 class="section-title reveal">Quinua en sus tres<br>variedades premium</h2>
+    <p class="reveal">Ofrecemos las tres variedades más demandadas del mercado internacional, cultivadas en las alturas de Ayacucho y procesadas bajo estándares de exportación. Selecciona una variedad para conocer su perfil nutricional completo.</p>
+  </div>
+
+  <div class="quinua-tabs">
+    <button class="tab-btn active" onclick="showTab('blanca')">🟡 Quinua Blanca</button>
+    <button class="tab-btn" onclick="showTab('roja')">🔴 Quinua Roja</button>
+    <button class="tab-btn" onclick="showTab('negra')">⚫ Quinua Negra</button>
+  </div>
+
+  <!-- QUINUA BLANCA -->
+  <div class="quinua-panel active" id="tab-blanca">
+    <div class="quinua-info">
+      <span class="quinua-variety-badge badge-blanca">Variedad Blanca / Pearl</span>
+      <h3>Quinua Blanca<br>Real de Ayacucho</h3>
+      <p class="quinua-desc">La variedad más cultivada y exportada del Perú. De sabor suave y textura esponjosa, es la preferida por la industria alimentaria internacional. Ideal para sopas, ensaladas, barras energéticas y harinas especiales. Alta demanda en EE.UU., Europa y Japón.</p>
+
+      <div class="nutri-grid">
+        <div class="nutri-card">
+          <span class="nutri-val">14.1g</span>
+          <span class="nutri-unit">por 100g</span>
+          <span class="nutri-name">Proteínas</span>
+        </div>
+        <div class="nutri-card">
+          <span class="nutri-val">64.2g</span>
+          <span class="nutri-unit">por 100g</span>
+          <span class="nutri-name">Carbohidratos</span>
+        </div>
+        <div class="nutri-card">
+          <span class="nutri-val">6.1g</span>
+          <span class="nutri-unit">por 100g</span>
+          <span class="nutri-name">Grasas totales</span>
+        </div>
+      </div>
+
+      <table class="nutri-table">
+        <tr><td>🔥 Energía</td><td>368 kcal</td></tr>
+        <tr><td>🌾 Fibra dietética</td><td>7.0 g</td></tr>
+        <tr><td>💧 Humedad máx.</td><td>≤ 12%</td></tr>
+        <tr><td>⚡ Hierro</td><td>4.6 mg</td></tr>
+        <tr><td>🦴 Calcio</td><td>66 mg</td></tr>
+        <tr><td>🧠 Magnesio</td><td>197 mg</td></tr>
+        <tr><td>✅ Saponinas</td><td>≤ 0.06% (lavada)</td></tr>
+        <tr><td>🌱 Libre de gluten</td><td>Certificado</td></tr>
+        <tr><td>📦 Presentación</td><td>25 kg / 50 kg / granel</td></tr>
+      </table>
+    </div>
+
+    <div class="quinua-visual-box">
+      <div class="quinua-img-placeholder">
+        <div class="q-img-icon">🟡</div>
+        <div class="q-img-text">Quinua Blanca Real</div>
+        <div style="font-size:0.75rem;color:rgba(245,237,216,0.5);margin-top:0.5rem;">Reemplaza esta sección con imagen real</div>
+      </div>
+      <div class="quinua-origin">
+        <h4>🏔️ Origen certificado</h4>
+        <p>Cultivada en las alturas de Ayacucho (3,200 – 3,800 m.s.n.m.). Trazabilidad completa desde el agricultor hasta el contenedor. Disponible con certificación orgánica y convencional.</p>
+      </div>
+      <a class="btn-primary" href="#contacto" style="text-align:center;display:block">Cotizar esta variedad</a>
+    </div>
+  </div>
+
+  <!-- QUINUA ROJA -->
+  <div class="quinua-panel" id="tab-roja">
+    <div class="quinua-info">
+      <span class="quinua-variety-badge badge-roja">Variedad Roja / Red</span>
+      <h3>Quinua Roja<br>de Ayacucho</h3>
+      <p class="quinua-desc">Variedad de alto valor en el mercado de salud y bienestar. Su color rojo intenso proviene de betalaínas y antioxidantes naturales. Textura más firme que la blanca, ideal para ensaladas gourmet, snacks saludables y mezclas tri-color. Perfil nutricional superior en minerales.</p>
+
+      <div class="nutri-grid">
+        <div class="nutri-card">
+          <span class="nutri-val">13.5g</span>
+          <span class="nutri-unit">por 100g</span>
+          <span class="nutri-name">Proteínas</span>
+        </div>
+        <div class="nutri-card">
+          <span class="nutri-val">62.5g</span>
+          <span class="nutri-unit">por 100g</span>
+          <span class="nutri-name">Carbohidratos</span>
+        </div>
+        <div class="nutri-card">
+          <span class="nutri-val">5.8g</span>
+          <span class="nutri-unit">por 100g</span>
+          <span class="nutri-name">Grasas totales</span>
+        </div>
+      </div>
+
+      <table class="nutri-table">
+        <tr><td>🔥 Energía</td><td>354 kcal</td></tr>
+        <tr><td>🌾 Fibra dietética</td><td>7.4 g</td></tr>
+        <tr><td>💧 Humedad máx.</td><td>≤ 12%</td></tr>
+        <tr><td>⚡ Hierro</td><td>5.2 mg</td></tr>
+        <tr><td>🦴 Calcio</td><td>72 mg</td></tr>
+        <tr><td>🛡️ Antioxidantes</td><td>Alto (betalaínas)</td></tr>
+        <tr><td>✅ Saponinas</td><td>≤ 0.06% (lavada)</td></tr>
+        <tr><td>🌱 Libre de gluten</td><td>Certificado</td></tr>
+        <tr><td>📦 Presentación</td><td>25 kg / 50 kg / granel</td></tr>
+      </table>
+    </div>
+
+    <div class="quinua-visual-box">
+      <div class="quinua-img-placeholder" style="background:#5A2020">
+        <div class="q-img-icon">🔴</div>
+        <div class="q-img-text">Quinua Roja</div>
+        <div style="font-size:0.75rem;color:rgba(245,237,216,0.5);margin-top:0.5rem;">Reemplaza esta sección con imagen real</div>
+      </div>
+      <div class="quinua-origin">
+        <h4>🏔️ Origen certificado</h4>
+        <p>Cultivada en zonas específicas de Ayacucho con condiciones climáticas ideales para el desarrollo del pigmento natural. Mayor contenido de antioxidantes por las condiciones de altitud y radiación UV.</p>
+      </div>
+      <a class="btn-primary" href="#contacto" style="text-align:center;display:block">Cotizar esta variedad</a>
+    </div>
+  </div>
+
+  <!-- QUINUA NEGRA -->
+  <div class="quinua-panel" id="tab-negra">
+    <div class="quinua-info">
+      <span class="quinua-variety-badge badge-negra">Variedad Negra / Black</span>
+      <h3>Quinua Negra<br>de Ayacucho</h3>
+      <p class="quinua-desc">La variedad más exclusiva y de mayor valor en el mercado premium. Rica en antocianinas —antioxidantes asociados a beneficios cardiovasculares— y con el perfil proteico más alto. Textura crujiente única, ideal para mercados gourmet y productos funcionales de alto valor agregado.</p>
+
+      <div class="nutri-grid">
+        <div class="nutri-card">
+          <span class="nutri-val">15.3g</span>
+          <span class="nutri-unit">por 100g</span>
+          <span class="nutri-name">Proteínas</span>
+        </div>
+        <div class="nutri-card">
+          <span class="nutri-val">60.8g</span>
+          <span class="nutri-unit">por 100g</span>
+          <span class="nutri-name">Carbohidratos</span>
+        </div>
+        <div class="nutri-card">
+          <span class="nutri-val">6.4g</span>
+          <span class="nutri-unit">por 100g</span>
+          <span class="nutri-name">Grasas totales</span>
+        </div>
+      </div>
+
+      <table class="nutri-table">
+        <tr><td>🔥 Energía</td><td>372 kcal</td></tr>
+        <tr><td>🌾 Fibra dietética</td><td>8.1 g</td></tr>
+        <tr><td>💧 Humedad máx.</td><td>≤ 12%</td></tr>
+        <tr><td>⚡ Hierro</td><td>5.8 mg</td></tr>
+        <tr><td>🦴 Calcio</td><td>78 mg</td></tr>
+        <tr><td>🛡️ Antioxidantes</td><td>Muy alto (antocianinas)</td></tr>
+        <tr><td>✅ Saponinas</td><td>≤ 0.06% (lavada)</td></tr>
+        <tr><td>🌱 Libre de gluten</td><td>Certificado</td></tr>
+        <tr><td>📦 Presentación</td><td>25 kg / 50 kg / granel</td></tr>
+      </table>
+    </div>
+
+    <div class="quinua-visual-box">
+      <div class="quinua-img-placeholder" style="background:#1A1410">
+        <div class="q-img-icon">⚫</div>
+        <div class="q-img-text">Quinua Negra Premium</div>
+        <div style="font-size:0.75rem;color:rgba(245,237,216,0.5);margin-top:0.5rem;">Reemplaza esta sección con imagen real</div>
+      </div>
+      <div class="quinua-origin">
+        <h4>🏔️ Origen certificado</h4>
+        <p>La variedad más escasa y cotizada. Cultivada en microclimas específicos de Ayacucho. Producción limitada que garantiza exclusividad y mayor precio por tonelada en mercados gourmet europeos y asiáticos.</p>
+      </div>
+      <a class="btn-primary" href="#contacto" style="text-align:center;display:block">Cotizar esta variedad</a>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICACIONES -->
+<section id="certificaciones">
+  <div class="section-eyebrow">Certificaciones</div>
+  <h2 class="section-title reveal">Calidad respaldada<br>por certificaciones internacionales</h2>
+
+  <div class="cert-grid">
+    <div class="cert-card reveal">
+      <div class="cert-icon">🌿</div>
+      <h4>Certificación Orgánica</h4>
+      <p>Disponible con certificación NOP (USDA) y EU Organic para mercados de Estados Unidos y Europa.</p>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-icon">✅</div>
+      <h4>HACCP</h4>
+      <p>Sistema de análisis de peligros y puntos de control crítico aplicado en toda nuestra cadena de procesamiento.</p>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-icon">🌱</div>
+      <h4>Libre de Gluten</h4>
+      <p>Certificación Gluten Free para atender la demanda de consumidores celíacos y mercados de salud especial.</p>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-icon">📋</div>
+      <h4>Tu Certificación</h4>
+      <p>Aquí irán las certificaciones que nos envíes. Agrega logos e información de tus certificaciones reales.</p>
+    </div>
+  </div>
+
+  <div class="cert-note">
+    💡 <strong>Nota para el administrador:</strong> Esta sección está lista para que agregues los logos y nombres de las certificaciones reales que obtengas. Reemplaza las tarjetas con tus certificaciones actuales (SENASA, FDA, Fairtrade, ISO, etc.).
+  </div>
+</section>
+
+<!-- CONTACTO / COTIZACIÓN -->
+<section id="contacto">
+  <div class="section-eyebrow">Cotizaciones</div>
+  <h2 class="section-title reveal">¿Interesado en importar<br>quinua peruana?</h2>
+
+  <div class="contact-layout">
+    <div class="contact-info">
+      <h3>Hablemos de tu requerimiento</h3>
+      <p>Atendemos importadores, distribuidores y marcas de todo el mundo. Cuéntanos tu volumen, variedad preferida y destino, y te enviamos una propuesta comercial en menos de 24 horas.</p>
+
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📍</div>
+        <div class="contact-detail-text">
+          <small>Ubicación</small>
+          <p>Ayacucho, Perú</p>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📱</div>
+        <div class="contact-detail-text">
+          <small>WhatsApp / Teléfono</small>
+          <p>+51 XXX XXX XXX</p>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <div class="contact-detail-icon">✉️</div>
+        <div class="contact-detail-text">
+          <small>Correo electrónico</small>
+          <p>contacto@sierralinda.pe</p>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <div class="contact-detail-icon">🌐</div>
+        <div class="contact-detail-text">
+          <small>Mercados destino</small>
+          <p>EE.UU., Europa, Asia, Oceanía</p>
+        </div>
+      </div>
+
+      <div style="margin-top:2rem;padding:1.5rem;background:var(--verde-dark);color:var(--crema)">
+        <div style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--oro-light);margin-bottom:0.8rem">Próximamente también</div>
+        <p style="font-size:0.9rem;line-height:1.7;color:rgba(245,237,216,0.8)">☕ <strong>Café ayacuchano</strong> de altura<br>🍫 <strong>Cocoa</strong> de origen peruano</p>
+      </div>
+    </div>
+
+    <div class="contact-form reveal">
+      <div class="form-title">📋 Solicitud de cotización</div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre completo *</label>
+          <input type="text" id="f-nombre" placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label>Empresa</label>
+          <input type="text" id="f-empresa" placeholder="Nombre de tu empresa">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>País de destino *</label>
+          <input type="text" id="f-pais" placeholder="Ej: España, EE.UU.">
+        </div>
+        <div class="form-group">
+          <label>Teléfono / WhatsApp</label>
+          <input type="text" id="f-telefono" placeholder="+1 XXX XXX XXXX">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Variedad de quinua *</label>
+        <select id="f-variedad">
+          <option value="">— Selecciona una variedad —</option>
+          <option value="Quinua Blanca Real">🟡 Quinua Blanca Real</option>
+          <option value="Quinua Roja">🔴 Quinua Roja</option>
+          <option value="Quinua Negra Premium">⚫ Quinua Negra Premium</option>
+          <option value="Mix Tri-color (Blanca + Roja + Negra)">🎨 Mix Tri-color (Blanca + Roja + Negra)</option>
+          <option value="Todas las variedades - cotizar por lote">📦 Todas las variedades</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Volumen requerido (TM) *</label>
+          <select id="f-volumen">
+            <option value="">— Selecciona —</option>
+            <option value="1 a 5 TM">1 a 5 TM</option>
+            <option value="5 a 20 TM">5 a 20 TM</option>
+            <option value="20 a 50 TM">20 a 50 TM</option>
+            <option value="más de 50 TM">Más de 50 TM</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tipo de certificación</label>
+          <select id="f-cert">
+            <option value="">— Opcional —</option>
+            <option value="Convencional">Convencional</option>
+            <option value="Orgánica certificada">Orgánica certificada</option>
+            <option value="Libre de gluten">Libre de gluten</option>
+            <option value="Orgánica + Gluten Free">Orgánica + Gluten Free</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Mensaje adicional</label>
+        <textarea id="f-mensaje" placeholder="Cuéntanos más sobre tu requerimiento: frecuencia de compra, condiciones de pago, incoterm preferido, etc."></textarea>
+      </div>
+
+      <button class="btn-whatsapp" onclick="enviarCotizacion()">
+        📱 Enviar cotización por WhatsApp
+      </button>
+      <p class="whatsapp-note">Se abrirá WhatsApp con tu mensaje pre-completado. Respondemos en menos de 24h.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">Sierra <span>Linda</span></div>
+      <p class="footer-desc">Exportadora peruana de quinua premium desde Ayacucho. Comprometidos con la calidad, la trazabilidad y el desarrollo de las comunidades andinas.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Navegación</h5>
+      <ul>
+        <li><a href="#nosotros">Quiénes somos</a></li>
+        <li><a href="#proceso">Proceso</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#certificaciones">Certificaciones</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Productos</h5>
+      <ul>
+        <li><a href="#productos">Quinua Blanca</a></li>
+        <li><a href="#productos">Quinua Roja</a></li>
+        <li><a href="#productos">Quinua Negra</a></li>
+        <li><a href="#productos">Mix Tri-color</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contacto</h5>
+      <ul>
+        <li><a href="#">Ayacucho, Perú</a></li>
+        <li><a href="mailto:contacto@sierralinda.pe">contacto@sierralinda.pe</a></li>
+        <li><a href="https://wa.me/51XXXXXXXXX" target="_blank">WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Sierra Linda S.A.C. — Ayacucho, Perú. Todos los derechos reservados.</span>
+    <span>Desarrollado con 🌾 para el mercado global</span>
+  </div>
+</footer>
+
+<script>
+  // TABS - Variedades de quinua
+  function showTab(id) {
+    document.querySelectorAll('.quinua-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  // COTIZACIÓN POR WHATSAPP
+  function enviarCotizacion() {
+    const nombre   = document.getElementById('f-nombre').value.trim();
+    const empresa  = document.getElementById('f-empresa').value.trim();
+    const pais     = document.getElementById('f-pais').value.trim();
+    const telefono = document.getElementById('f-telefono').value.trim();
+    const variedad = document.getElementById('f-variedad').value;
+    const volumen  = document.getElementById('f-volumen').value;
+    const cert     = document.getElementById('f-cert').value;
+    const mensaje  = document.getElementById('f-mensaje').value.trim();
+
+    if (!nombre || !pais || !variedad || !volumen) {
+      alert('Por favor, completa los campos obligatorios: nombre, país, variedad y volumen.');
+      return;
+    }
+
+    let texto = `🌾 *Solicitud de cotización - Sierra Linda*\n\n`;
+    texto += `👤 *Nombre:* ${nombre}\n`;
+    if (empresa) texto += `🏢 *Empresa:* ${empresa}\n`;
+    texto += `🌍 *País destino:* ${pais}\n`;
+    if (telefono) texto += `📞 *Teléfono:* ${telefono}\n`;
+    texto += `\n🌾 *Variedad solicitada:* ${variedad}\n`;
+    texto += `📦 *Volumen requerido:* ${volumen}\n`;
+    if (cert) texto += `✅ *Certificación:* ${cert}\n`;
+    if (mensaje) texto += `\n💬 *Mensaje adicional:*\n${mensaje}`;
+
+    // REEMPLAZA con el número real de WhatsApp de Sierra Linda
+    const numeroWA = '51XXXXXXXXX';
+    const url = `https://wa.me/${numeroWA}?text=${encodeURIComponent(texto)}`;
+    window.open(url, '_blank');
+  }
+
+  // SCROLL REVEAL
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
