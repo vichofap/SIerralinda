@@ -58,6 +58,31 @@
 
   .nav-links a:hover { color: var(--verde); }
 
+  .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+
+  /* ── SELECTOR DE IDIOMA ── */
+  .lang-toggle {
+    display: flex; align-items: center; gap: 0.15rem;
+    border: 1px solid var(--crema-dark);
+    padding: 0.2rem;
+  }
+
+  .lang-btn {
+    background: none; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em;
+    color: var(--gris);
+    padding: 0.35rem 0.7rem;
+    transition: all .2s;
+  }
+
+  .lang-btn:hover { color: var(--verde-dark); }
+
+  .lang-btn.active {
+    background: var(--verde-dark);
+    color: var(--crema);
+  }
+
   /* ── HERO ── */
   #hero {
     min-height: 100vh;
@@ -186,23 +211,6 @@
   .orbit-dot:nth-child(1) { top: -6px; left: 50%; transform: translateX(-50%); }
   .orbit-dot:nth-child(2) { bottom: -6px; left: 50%; transform: translateX(-50%); }
   .orbit-dot:nth-child(3) { left: -6px; top: 50%; transform: translateY(-50%); }
-
-  .hero-stats {
-    position: absolute; bottom: -30px; left: 0; right: 0;
-    display: flex; justify-content: center; gap: 3rem;
-    padding: 1.5rem 5%;
-  }
-
-  .stat { text-align: center; }
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem; font-weight: 600; color: var(--verde-dark);
-    display: block;
-  }
-  .stat-label {
-    font-size: 0.72rem; color: var(--gris);
-    letter-spacing: 0.08em; text-transform: uppercase;
-  }
 
   /* ── SECTIONS COMMON ── */
   section { padding: 6rem 5%; }
@@ -494,6 +502,13 @@
 
   .cert-card p { font-size: 0.82rem; color: var(--gris); line-height: 1.6; }
 
+  .cert-status {
+    display: inline-block; margin-top: 1rem;
+    padding: 0.25rem 0.9rem;
+    font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+    background: rgba(200,146,42,0.12); color: var(--oro);
+  }
+
   .cert-note {
     margin-top: 2rem;
     padding: 1rem 1.5rem;
@@ -669,6 +684,9 @@
     nav { padding: 1rem 5%; }
     .nav-links { display: none; }
     .btn-outline { display: none; }
+    .nav-right .btn-primary { display: none; }
+    .quinua-tabs { overflow-x: auto; }
+    .tab-btn { padding: 1rem 1.2rem; white-space: nowrap; }
   }
 </style>
 </head>
@@ -681,29 +699,35 @@
 <nav>
   <a class="nav-logo" href="#hero">Sierra <span>Linda</span></a>
   <ul class="nav-links">
-    <li><a href="#nosotros">Nosotros</a></li>
-    <li><a href="#proceso">Proceso</a></li>
-    <li><a href="#productos">Productos</a></li>
-    <li><a href="#certificaciones">Certificaciones</a></li>
-    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#nosotros" data-i18n="nav.nosotros">Nosotros</a></li>
+    <li><a href="#proceso" data-i18n="nav.proceso">Proceso</a></li>
+    <li><a href="#productos" data-i18n="nav.productos">Productos</a></li>
+    <li><a href="#certificaciones" data-i18n="nav.cert">Certificaciones</a></li>
+    <li><a href="#contacto" data-i18n="nav.contacto">Contacto</a></li>
   </ul>
-  <a class="btn-primary" href="#contacto">Cotizar ahora</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Idioma / Language">
+      <button class="lang-btn active" data-lang="es" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+    </div>
+    <a class="btn-primary" href="#contacto" data-i18n="nav.cta">Cotizar ahora</a>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
   <div class="hero-text reveal">
-    <div class="hero-eyebrow">Ayacucho · Perú · Desde los Andes</div>
-    <h1 class="hero-title">
+    <div class="hero-eyebrow" data-i18n="hero.eyebrow">Ayacucho · Perú · Desde los Andes</div>
+    <h1 class="hero-title" data-i18n="hero.title">
       Quinua peruana<br>
       de <em>alta pureza</em><br>
       para el mundo
     </h1>
-    <p class="hero-subtitle">
+    <p class="hero-subtitle" data-i18n="hero.subtitle">
       Sierra Linda es una empresa ayacuchana comprometida con la exportación de quinua premium en sus tres variedades, llevando lo mejor de los Andes peruanos a los mercados internacionales.
     </p>
-    <a class="btn-primary" href="#productos">Ver nuestros productos</a>
-    <a class="btn-outline" href="#contacto">Solicitar cotización</a>
+    <a class="btn-primary" href="#productos" data-i18n="hero.btn1">Ver nuestros productos</a>
+    <a class="btn-outline" href="#contacto" data-i18n="hero.btn2">Solicitar cotización</a>
   </div>
 
   <div class="hero-visual">
@@ -714,7 +738,7 @@
       <div class="hero-badge-inner">
         <div class="badge-icon">🌾</div>
         <div class="badge-title">Sierra<br>Linda</div>
-        <div class="badge-sub">Quinua Ayacuchana</div>
+        <div class="badge-sub" data-i18n="hero.badge">Quinua Ayacuchana</div>
       </div>
     </div>
   </div>
@@ -723,22 +747,22 @@
 <!-- QUIÉNES SOMOS -->
 <section id="nosotros">
   <div class="about-text">
-    <div class="section-eyebrow">Quiénes somos</div>
-    <h2 class="section-title reveal">Raíces andinas,<br>proyección global</h2>
+    <div class="section-eyebrow" data-i18n="about.eyebrow">Quiénes somos</div>
+    <h2 class="section-title reveal" data-i18n="about.title">Raíces andinas,<br>proyección global</h2>
 
     <div style="margin-top:2rem">
-      <p class="reveal">Sierra Linda nació en Ayacucho, el corazón de los Andes peruanos, con una misión clara: llevar la quinua de mejor calidad a los mercados internacionales más exigentes. Trabajamos directamente con agricultores locales para asegurar trazabilidad, calidad y desarrollo sostenible en cada lote.</p>
-      <p class="reveal">Nuestra empresa combina el conocimiento ancestral del cultivo de quinua con estándares modernos de procesamiento y exportación, garantizando un producto que cumple con los requisitos de mercados de Estados Unidos, Europa y Asia.</p>
+      <p class="reveal" data-i18n="about.p1">Sierra Linda nació en Ayacucho, el corazón de los Andes peruanos, con una misión clara: llevar la quinua de mejor calidad a los mercados internacionales más exigentes. Trabajamos directamente con agricultores locales para asegurar trazabilidad, calidad y desarrollo sostenible en cada lote.</p>
+      <p class="reveal" data-i18n="about.p2">Nuestra empresa combina el conocimiento ancestral del cultivo de quinua con estándares modernos de procesamiento y exportación, garantizando un producto que cumple con los requisitos de mercados de Estados Unidos, Europa y Asia.</p>
     </div>
 
     <div class="mv-grid">
       <div class="mv-card reveal">
-        <h3>🎯 Misión</h3>
-        <p>Exportar quinua ayacuchana de alta calidad, conectando a los agricultores andinos con mercados internacionales, generando valor económico y social en nuestra región.</p>
+        <h3 data-i18n="about.mision.t">🎯 Misión</h3>
+        <p data-i18n="about.mision.p">Exportar quinua ayacuchana de alta calidad, conectando a los agricultores andinos con mercados internacionales, generando valor económico y social en nuestra región.</p>
       </div>
       <div class="mv-card reveal">
-        <h3>🔭 Visión</h3>
-        <p>Ser el referente peruano de exportación de superalimentos andinos para el 2030, reconocidos globalmente por nuestra calidad, trazabilidad y compromiso con el desarrollo sostenible.</p>
+        <h3 data-i18n="about.vision.t">🔭 Visión</h3>
+        <p data-i18n="about.vision.p">Ser el referente peruano de exportación de superalimentos andinos para el 2030, reconocidos globalmente por nuestra calidad, trazabilidad y compromiso con el desarrollo sostenible.</p>
       </div>
     </div>
   </div>
@@ -746,7 +770,7 @@
   <div class="about-visual reveal">
     <div class="about-box-top"></div>
     <div class="about-box-main">
-      <p>"Del campo ayacuchano a la mesa del mundo"</p>
+      <p data-i18n="about.quote">"Del campo ayacuchano a la mesa del mundo"</p>
     </div>
     <div class="about-box-accent"><span>🌾</span></div>
   </div>
@@ -754,39 +778,39 @@
 
 <!-- PROCESO -->
 <section id="proceso">
-  <div class="section-eyebrow">Nuestro proceso</div>
-  <h2 class="section-title reveal">De la sierra al<br>mercado internacional</h2>
+  <div class="section-eyebrow" data-i18n="proc.eyebrow">Nuestro proceso</div>
+  <h2 class="section-title reveal" data-i18n="proc.title">De la sierra al<br>mercado internacional</h2>
 
   <div class="process-grid">
     <div class="process-step reveal">
       <div class="step-num">1</div>
       <div class="step-icon">🌱</div>
-      <h4>Cultivo</h4>
-      <p>Trabajamos con agricultores de Ayacucho, cultivando quinua a más de 3,000 m.s.n.m. bajo prácticas sostenibles y libres de pesticidas.</p>
+      <h4 data-i18n="proc.s1.t">Cultivo</h4>
+      <p data-i18n="proc.s1.p">Trabajamos con agricultores de Ayacucho, cultivando quinua a más de 3,000 m.s.n.m. bajo prácticas sostenibles y libres de pesticidas.</p>
     </div>
     <div class="process-step reveal">
       <div class="step-num">2</div>
       <div class="step-icon">🏔️</div>
-      <h4>Cosecha</h4>
-      <p>Recolección manual en el momento óptimo de madurez para preservar el perfil nutricional completo de cada variedad.</p>
+      <h4 data-i18n="proc.s2.t">Cosecha</h4>
+      <p data-i18n="proc.s2.p">Recolección manual en el momento óptimo de madurez para preservar el perfil nutricional completo de cada variedad.</p>
     </div>
     <div class="process-step reveal">
       <div class="step-num">3</div>
       <div class="step-icon">⚙️</div>
-      <h4>Procesamiento</h4>
-      <p>Selección, limpieza y escarificación en planta certificada. Control de calidad en cada etapa bajo normas internacionales.</p>
+      <h4 data-i18n="proc.s3.t">Procesamiento</h4>
+      <p data-i18n="proc.s3.p">Selección, limpieza y escarificación en planta certificada. Control de calidad en cada etapa bajo normas internacionales.</p>
     </div>
     <div class="process-step reveal">
       <div class="step-num">4</div>
       <div class="step-icon">📦</div>
-      <h4>Empaque</h4>
-      <p>Empaque en presentaciones de 25 kg, 50 kg y a granel, con etiquetado según normativa del país de destino.</p>
+      <h4 data-i18n="proc.s4.t">Empaque</h4>
+      <p data-i18n="proc.s4.p">Empaque en sacos de 25 kg, 50 kg y a granel, con etiquetado según normativa del país de destino.</p>
     </div>
     <div class="process-step reveal">
       <div class="step-num">5</div>
       <div class="step-icon">✈️</div>
-      <h4>Exportación</h4>
-      <p>Gestión logística completa: documentación, certificados fitosanitarios y coordinación con operadores de carga internacional.</p>
+      <h4 data-i18n="proc.s5.t">Exportación</h4>
+      <p data-i18n="proc.s5.p">Gestión logística completa: documentación, certificados fitosanitarios y coordinación con operadores de carga internacional.</p>
     </div>
   </div>
 </section>
@@ -794,229 +818,233 @@
 <!-- PRODUCTOS -->
 <section id="productos">
   <div class="quinua-intro">
-    <div class="section-eyebrow">Nuestros productos</div>
-    <h2 class="section-title reveal">Quinua en sus tres<br>variedades premium</h2>
-    <p class="reveal">Ofrecemos las tres variedades más demandadas del mercado internacional, cultivadas en las alturas de Ayacucho y procesadas bajo estándares de exportación. Selecciona una variedad para conocer su perfil nutricional completo.</p>
+    <div class="section-eyebrow" data-i18n="prod.eyebrow">Nuestros productos</div>
+    <h2 class="section-title reveal" data-i18n="prod.title">Quinua en sus tres<br>variedades premium</h2>
+    <p class="reveal" data-i18n="prod.intro">Ofrecemos las tres variedades más demandadas del mercado internacional, cultivadas en las alturas de Ayacucho y procesadas bajo estándares de exportación. Selecciona una variedad para conocer su perfil nutricional completo.</p>
   </div>
 
   <div class="quinua-tabs">
-    <button class="tab-btn active" onclick="showTab('blanca')">🟡 Quinua Blanca</button>
-    <button class="tab-btn" onclick="showTab('roja')">🔴 Quinua Roja</button>
-    <button class="tab-btn" onclick="showTab('negra')">⚫ Quinua Negra</button>
+    <button class="tab-btn active" onclick="showTab('blanca', this)" data-i18n="prod.tab.blanca">🟡 Quinua Blanca</button>
+    <button class="tab-btn" onclick="showTab('roja', this)" data-i18n="prod.tab.roja">🔴 Quinua Roja</button>
+    <button class="tab-btn" onclick="showTab('negra', this)" data-i18n="prod.tab.negra">⚫ Quinua Negra</button>
   </div>
 
   <!-- QUINUA BLANCA -->
   <div class="quinua-panel active" id="tab-blanca">
     <div class="quinua-info">
-      <span class="quinua-variety-badge badge-blanca">Variedad Blanca / Pearl</span>
-      <h3>Quinua Blanca<br>Real de Ayacucho</h3>
-      <p class="quinua-desc">La variedad más cultivada y exportada del Perú. De sabor suave y textura esponjosa, es la preferida por la industria alimentaria internacional. Ideal para sopas, ensaladas, barras energéticas y harinas especiales. Alta demanda en EE.UU., Europa y Japón.</p>
+      <span class="quinua-variety-badge badge-blanca" data-i18n="b.badge">Variedad Blanca / Pearl</span>
+      <h3 data-i18n="b.name">Quinua Blanca<br>Real de Ayacucho</h3>
+      <p class="quinua-desc" data-i18n="b.desc">La variedad más cultivada y exportada del Perú. De sabor suave y textura esponjosa, es la preferida por la industria alimentaria internacional. Ideal para sopas, ensaladas, barras energéticas y harinas especiales. Alta demanda en EE.UU., Europa y Japón.</p>
 
       <div class="nutri-grid">
         <div class="nutri-card">
           <span class="nutri-val">14.1g</span>
-          <span class="nutri-unit">por 100g</span>
-          <span class="nutri-name">Proteínas</span>
+          <span class="nutri-unit" data-i18n="nutri.per100">por 100g</span>
+          <span class="nutri-name" data-i18n="nutri.prot">Proteínas</span>
         </div>
         <div class="nutri-card">
           <span class="nutri-val">64.2g</span>
-          <span class="nutri-unit">por 100g</span>
-          <span class="nutri-name">Carbohidratos</span>
+          <span class="nutri-unit" data-i18n="nutri.per100">por 100g</span>
+          <span class="nutri-name" data-i18n="nutri.carb">Carbohidratos</span>
         </div>
         <div class="nutri-card">
           <span class="nutri-val">6.1g</span>
-          <span class="nutri-unit">por 100g</span>
-          <span class="nutri-name">Grasas totales</span>
+          <span class="nutri-unit" data-i18n="nutri.per100">por 100g</span>
+          <span class="nutri-name" data-i18n="nutri.fat">Grasas buenas</span>
         </div>
       </div>
 
       <table class="nutri-table">
-        <tr><td>🔥 Energía</td><td>368 kcal</td></tr>
-        <tr><td>🌾 Fibra dietética</td><td>7.0 g</td></tr>
-        <tr><td>💧 Humedad máx.</td><td>≤ 12%</td></tr>
-        <tr><td>⚡ Hierro</td><td>4.6 mg</td></tr>
-        <tr><td>🦴 Calcio</td><td>66 mg</td></tr>
-        <tr><td>🧠 Magnesio</td><td>197 mg</td></tr>
-        <tr><td>✅ Saponinas</td><td>≤ 0.06% (lavada)</td></tr>
-        <tr><td>🌱 Libre de gluten</td><td>Certificado</td></tr>
-        <tr><td>📦 Presentación</td><td>25 kg / 50 kg / granel</td></tr>
+        <tr><td data-i18n="t.energia">🔥 Energía</td><td>368 kcal</td></tr>
+        <tr><td data-i18n="t.fibra">🌾 Fibra dietética</td><td>7.0 g</td></tr>
+        <tr><td data-i18n="t.humedad">💧 Humedad máx.</td><td>≤ 12%</td></tr>
+        <tr><td data-i18n="t.hierro">⚡ Hierro</td><td>4.6 mg</td></tr>
+        <tr><td data-i18n="t.calcio">🦴 Calcio</td><td>66 mg</td></tr>
+        <tr><td data-i18n="t.magnesio">🧠 Magnesio</td><td>197 mg</td></tr>
+        <tr><td data-i18n="t.saponinas">✅ Saponinas</td><td data-i18n="v.saponinas">≤ 0.06% (lavada)</td></tr>
+        <tr><td data-i18n="t.gluten">🌱 Libre de gluten</td><td data-i18n="v.natural">Naturalmente</td></tr>
+        <tr><td data-i18n="t.present">📦 Presentación</td><td data-i18n="v.present">Sacos 25 kg / 50 kg / granel</td></tr>
       </table>
     </div>
 
     <div class="quinua-visual-box">
       <div class="quinua-img-placeholder">
         <div class="q-img-icon">🟡</div>
-        <div class="q-img-text">Quinua Blanca Real</div>
-        <div style="font-size:0.75rem;color:rgba(245,237,216,0.5);margin-top:0.5rem;">Reemplaza esta sección con imagen real</div>
+        <div class="q-img-text" data-i18n="b.img">Quinua Blanca Real</div>
+        <div style="font-size:0.75rem;color:rgba(245,237,216,0.5);margin-top:0.5rem;" data-i18n="img.note">Reemplaza esta sección con imagen real</div>
       </div>
       <div class="quinua-origin">
-        <h4>🏔️ Origen certificado</h4>
-        <p>Cultivada en las alturas de Ayacucho (3,200 – 3,800 m.s.n.m.). Trazabilidad completa desde el agricultor hasta el contenedor. Disponible con certificación orgánica y convencional.</p>
+        <h4 data-i18n="origin.h">🏔️ Origen andino</h4>
+        <p data-i18n="b.origin">Cultivada en las alturas de Ayacucho (3,200 – 3,800 m.s.n.m.). Trazabilidad completa desde el agricultor hasta el contenedor.</p>
       </div>
-      <a class="btn-primary" href="#contacto" style="text-align:center;display:block">Cotizar esta variedad</a>
+      <a class="btn-primary" href="#contacto" style="text-align:center;display:block" data-i18n="prod.cotizar">Cotizar esta variedad</a>
     </div>
   </div>
 
   <!-- QUINUA ROJA -->
   <div class="quinua-panel" id="tab-roja">
     <div class="quinua-info">
-      <span class="quinua-variety-badge badge-roja">Variedad Roja / Red</span>
-      <h3>Quinua Roja<br>de Ayacucho</h3>
-      <p class="quinua-desc">Variedad de alto valor en el mercado de salud y bienestar. Su color rojo intenso proviene de betalaínas y antioxidantes naturales. Textura más firme que la blanca, ideal para ensaladas gourmet, snacks saludables y mezclas tri-color. Perfil nutricional superior en minerales.</p>
+      <span class="quinua-variety-badge badge-roja" data-i18n="r.badge">Variedad Roja / Red</span>
+      <h3 data-i18n="r.name">Quinua Roja<br>de Ayacucho</h3>
+      <p class="quinua-desc" data-i18n="r.desc">Variedad de alto valor en el mercado de salud y bienestar. Su color rojo intenso proviene de betalaínas y antioxidantes naturales. Textura más firme que la blanca, ideal para ensaladas gourmet, snacks saludables y mezclas tri-color. Perfil nutricional superior en minerales.</p>
 
       <div class="nutri-grid">
         <div class="nutri-card">
           <span class="nutri-val">13.5g</span>
-          <span class="nutri-unit">por 100g</span>
-          <span class="nutri-name">Proteínas</span>
+          <span class="nutri-unit" data-i18n="nutri.per100">por 100g</span>
+          <span class="nutri-name" data-i18n="nutri.prot">Proteínas</span>
         </div>
         <div class="nutri-card">
           <span class="nutri-val">62.5g</span>
-          <span class="nutri-unit">por 100g</span>
-          <span class="nutri-name">Carbohidratos</span>
+          <span class="nutri-unit" data-i18n="nutri.per100">por 100g</span>
+          <span class="nutri-name" data-i18n="nutri.carb">Carbohidratos</span>
         </div>
         <div class="nutri-card">
           <span class="nutri-val">5.8g</span>
-          <span class="nutri-unit">por 100g</span>
-          <span class="nutri-name">Grasas totales</span>
+          <span class="nutri-unit" data-i18n="nutri.per100">por 100g</span>
+          <span class="nutri-name" data-i18n="nutri.fat">Grasas buenas</span>
         </div>
       </div>
 
       <table class="nutri-table">
-        <tr><td>🔥 Energía</td><td>354 kcal</td></tr>
-        <tr><td>🌾 Fibra dietética</td><td>7.4 g</td></tr>
-        <tr><td>💧 Humedad máx.</td><td>≤ 12%</td></tr>
-        <tr><td>⚡ Hierro</td><td>5.2 mg</td></tr>
-        <tr><td>🦴 Calcio</td><td>72 mg</td></tr>
-        <tr><td>🛡️ Antioxidantes</td><td>Alto (betalaínas)</td></tr>
-        <tr><td>✅ Saponinas</td><td>≤ 0.06% (lavada)</td></tr>
-        <tr><td>🌱 Libre de gluten</td><td>Certificado</td></tr>
-        <tr><td>📦 Presentación</td><td>25 kg / 50 kg / granel</td></tr>
+        <tr><td data-i18n="t.energia">🔥 Energía</td><td>354 kcal</td></tr>
+        <tr><td data-i18n="t.fibra">🌾 Fibra dietética</td><td>7.4 g</td></tr>
+        <tr><td data-i18n="t.humedad">💧 Humedad máx.</td><td>≤ 12%</td></tr>
+        <tr><td data-i18n="t.hierro">⚡ Hierro</td><td>5.2 mg</td></tr>
+        <tr><td data-i18n="t.calcio">🦴 Calcio</td><td>72 mg</td></tr>
+        <tr><td data-i18n="t.antiox">🛡️ Antioxidantes</td><td data-i18n="r.antiox">Alto (betalaínas)</td></tr>
+        <tr><td data-i18n="t.saponinas">✅ Saponinas</td><td data-i18n="v.saponinas">≤ 0.06% (lavada)</td></tr>
+        <tr><td data-i18n="t.gluten">🌱 Libre de gluten</td><td data-i18n="v.natural">Naturalmente</td></tr>
+        <tr><td data-i18n="t.present">📦 Presentación</td><td data-i18n="v.present">Sacos 25 kg / 50 kg / granel</td></tr>
       </table>
     </div>
 
     <div class="quinua-visual-box">
       <div class="quinua-img-placeholder" style="background:#5A2020">
         <div class="q-img-icon">🔴</div>
-        <div class="q-img-text">Quinua Roja</div>
-        <div style="font-size:0.75rem;color:rgba(245,237,216,0.5);margin-top:0.5rem;">Reemplaza esta sección con imagen real</div>
+        <div class="q-img-text" data-i18n="r.img">Quinua Roja</div>
+        <div style="font-size:0.75rem;color:rgba(245,237,216,0.5);margin-top:0.5rem;" data-i18n="img.note">Reemplaza esta sección con imagen real</div>
       </div>
       <div class="quinua-origin">
-        <h4>🏔️ Origen certificado</h4>
-        <p>Cultivada en zonas específicas de Ayacucho con condiciones climáticas ideales para el desarrollo del pigmento natural. Mayor contenido de antioxidantes por las condiciones de altitud y radiación UV.</p>
+        <h4 data-i18n="origin.h">🏔️ Origen andino</h4>
+        <p data-i18n="r.origin">Cultivada en zonas específicas de Ayacucho con condiciones climáticas ideales para el desarrollo del pigmento natural. Mayor contenido de antioxidantes por las condiciones de altitud y radiación UV.</p>
       </div>
-      <a class="btn-primary" href="#contacto" style="text-align:center;display:block">Cotizar esta variedad</a>
+      <a class="btn-primary" href="#contacto" style="text-align:center;display:block" data-i18n="prod.cotizar">Cotizar esta variedad</a>
     </div>
   </div>
 
   <!-- QUINUA NEGRA -->
   <div class="quinua-panel" id="tab-negra">
     <div class="quinua-info">
-      <span class="quinua-variety-badge badge-negra">Variedad Negra / Black</span>
-      <h3>Quinua Negra<br>de Ayacucho</h3>
-      <p class="quinua-desc">La variedad más exclusiva y de mayor valor en el mercado premium. Rica en antocianinas —antioxidantes asociados a beneficios cardiovasculares— y con el perfil proteico más alto. Textura crujiente única, ideal para mercados gourmet y productos funcionales de alto valor agregado.</p>
+      <span class="quinua-variety-badge badge-negra" data-i18n="n.badge">Variedad Negra / Black</span>
+      <h3 data-i18n="n.name">Quinua Negra<br>de Ayacucho</h3>
+      <p class="quinua-desc" data-i18n="n.desc">La variedad más exclusiva y de mayor valor en el mercado premium. Rica en antocianinas —antioxidantes asociados a beneficios cardiovasculares— y con el perfil proteico más alto. Textura crujiente única, ideal para mercados gourmet y productos funcionales de alto valor agregado.</p>
 
       <div class="nutri-grid">
         <div class="nutri-card">
           <span class="nutri-val">15.3g</span>
-          <span class="nutri-unit">por 100g</span>
-          <span class="nutri-name">Proteínas</span>
+          <span class="nutri-unit" data-i18n="nutri.per100">por 100g</span>
+          <span class="nutri-name" data-i18n="nutri.prot">Proteínas</span>
         </div>
         <div class="nutri-card">
           <span class="nutri-val">60.8g</span>
-          <span class="nutri-unit">por 100g</span>
-          <span class="nutri-name">Carbohidratos</span>
+          <span class="nutri-unit" data-i18n="nutri.per100">por 100g</span>
+          <span class="nutri-name" data-i18n="nutri.carb">Carbohidratos</span>
         </div>
         <div class="nutri-card">
           <span class="nutri-val">6.4g</span>
-          <span class="nutri-unit">por 100g</span>
-          <span class="nutri-name">Grasas totales</span>
+          <span class="nutri-unit" data-i18n="nutri.per100">por 100g</span>
+          <span class="nutri-name" data-i18n="nutri.fat">Grasas buenas</span>
         </div>
       </div>
 
       <table class="nutri-table">
-        <tr><td>🔥 Energía</td><td>372 kcal</td></tr>
-        <tr><td>🌾 Fibra dietética</td><td>8.1 g</td></tr>
-        <tr><td>💧 Humedad máx.</td><td>≤ 12%</td></tr>
-        <tr><td>⚡ Hierro</td><td>5.8 mg</td></tr>
-        <tr><td>🦴 Calcio</td><td>78 mg</td></tr>
-        <tr><td>🛡️ Antioxidantes</td><td>Muy alto (antocianinas)</td></tr>
-        <tr><td>✅ Saponinas</td><td>≤ 0.06% (lavada)</td></tr>
-        <tr><td>🌱 Libre de gluten</td><td>Certificado</td></tr>
-        <tr><td>📦 Presentación</td><td>25 kg / 50 kg / granel</td></tr>
+        <tr><td data-i18n="t.energia">🔥 Energía</td><td>372 kcal</td></tr>
+        <tr><td data-i18n="t.fibra">🌾 Fibra dietética</td><td>8.1 g</td></tr>
+        <tr><td data-i18n="t.humedad">💧 Humedad máx.</td><td>≤ 12%</td></tr>
+        <tr><td data-i18n="t.hierro">⚡ Hierro</td><td>5.8 mg</td></tr>
+        <tr><td data-i18n="t.calcio">🦴 Calcio</td><td>78 mg</td></tr>
+        <tr><td data-i18n="t.antiox">🛡️ Antioxidantes</td><td data-i18n="n.antiox">Muy alto (antocianinas)</td></tr>
+        <tr><td data-i18n="t.saponinas">✅ Saponinas</td><td data-i18n="v.saponinas">≤ 0.06% (lavada)</td></tr>
+        <tr><td data-i18n="t.gluten">🌱 Libre de gluten</td><td data-i18n="v.natural">Naturalmente</td></tr>
+        <tr><td data-i18n="t.present">📦 Presentación</td><td data-i18n="v.present">Sacos 25 kg / 50 kg / granel</td></tr>
       </table>
     </div>
 
     <div class="quinua-visual-box">
       <div class="quinua-img-placeholder" style="background:#1A1410">
         <div class="q-img-icon">⚫</div>
-        <div class="q-img-text">Quinua Negra Premium</div>
-        <div style="font-size:0.75rem;color:rgba(245,237,216,0.5);margin-top:0.5rem;">Reemplaza esta sección con imagen real</div>
+        <div class="q-img-text" data-i18n="n.img">Quinua Negra Premium</div>
+        <div style="font-size:0.75rem;color:rgba(245,237,216,0.5);margin-top:0.5rem;" data-i18n="img.note">Reemplaza esta sección con imagen real</div>
       </div>
       <div class="quinua-origin">
-        <h4>🏔️ Origen certificado</h4>
-        <p>La variedad más escasa y cotizada. Cultivada en microclimas específicos de Ayacucho. Producción limitada que garantiza exclusividad y mayor precio por tonelada en mercados gourmet europeos y asiáticos.</p>
+        <h4 data-i18n="origin.h">🏔️ Origen andino</h4>
+        <p data-i18n="n.origin">La variedad más escasa y cotizada. Cultivada en microclimas específicos de Ayacucho. Producción limitada que garantiza exclusividad y mayor precio por tonelada en mercados gourmet europeos y asiáticos.</p>
       </div>
-      <a class="btn-primary" href="#contacto" style="text-align:center;display:block">Cotizar esta variedad</a>
+      <a class="btn-primary" href="#contacto" style="text-align:center;display:block" data-i18n="prod.cotizar">Cotizar esta variedad</a>
     </div>
   </div>
 </section>
 
 <!-- CERTIFICACIONES -->
 <section id="certificaciones">
-  <div class="section-eyebrow">Certificaciones</div>
-  <h2 class="section-title reveal">Calidad respaldada<br>por certificaciones internacionales</h2>
+  <div class="section-eyebrow" data-i18n="cert.eyebrow">Certificaciones</div>
+  <h2 class="section-title reveal" data-i18n="cert.title">Comprometidos con los<br>estándares internacionales</h2>
 
   <div class="cert-grid">
     <div class="cert-card reveal">
       <div class="cert-icon">🌿</div>
-      <h4>Certificación Orgánica</h4>
-      <p>Disponible con certificación NOP (USDA) y EU Organic para mercados de Estados Unidos y Europa.</p>
+      <h4 data-i18n="cert.c1.t">Certificación Orgánica</h4>
+      <p data-i18n="cert.c1.p">NOP (USDA) y EU Organic para acceder a los mercados de Estados Unidos y Europa.</p>
+      <span class="cert-status" data-i18n="cert.status">En proceso</span>
     </div>
     <div class="cert-card reveal">
       <div class="cert-icon">✅</div>
       <h4>HACCP</h4>
-      <p>Sistema de análisis de peligros y puntos de control crítico aplicado en toda nuestra cadena de procesamiento.</p>
+      <p data-i18n="cert.c2.p">Sistema de análisis de peligros y puntos de control crítico en toda la cadena de procesamiento.</p>
+      <span class="cert-status" data-i18n="cert.status">En proceso</span>
     </div>
     <div class="cert-card reveal">
       <div class="cert-icon">🌱</div>
-      <h4>Libre de Gluten</h4>
-      <p>Certificación Gluten Free para atender la demanda de consumidores celíacos y mercados de salud especial.</p>
+      <h4 data-i18n="cert.c3.t">Libre de Gluten</h4>
+      <p data-i18n="cert.c3.p">Certificación Gluten Free para atender la demanda de consumidores celíacos y mercados de salud.</p>
+      <span class="cert-status" data-i18n="cert.status">En proceso</span>
     </div>
     <div class="cert-card reveal">
       <div class="cert-icon">📋</div>
-      <h4>Tu Certificación</h4>
-      <p>Aquí irán las certificaciones que nos envíes. Agrega logos e información de tus certificaciones reales.</p>
+      <h4 data-i18n="cert.c4.t">Fitosanitario SENASA</h4>
+      <p data-i18n="cert.c4.p">Certificado fitosanitario emitido por SENASA Perú, requisito para cada embarque de exportación.</p>
+      <span class="cert-status" data-i18n="cert.status">En proceso</span>
     </div>
   </div>
 
-  <div class="cert-note">
-    💡 <strong>Nota para el administrador:</strong> Esta sección está lista para que agregues los logos y nombres de las certificaciones reales que obtengas. Reemplaza las tarjetas con tus certificaciones actuales (SENASA, FDA, Fairtrade, ISO, etc.).
+  <div class="cert-note" data-i18n="cert.note">
+    🌾 Actualmente nos encontramos en proceso de obtención de nuestras certificaciones internacionales. Esta sección se actualizará con los sellos oficiales a medida que sean otorgados.
   </div>
 </section>
 
 <!-- CONTACTO / COTIZACIÓN -->
 <section id="contacto">
-  <div class="section-eyebrow">Cotizaciones</div>
-  <h2 class="section-title reveal">¿Interesado en importar<br>quinua peruana?</h2>
+  <div class="section-eyebrow" data-i18n="contact.eyebrow">Cotizaciones</div>
+  <h2 class="section-title reveal" data-i18n="contact.title">¿Interesado en importar<br>quinua peruana?</h2>
 
   <div class="contact-layout">
     <div class="contact-info">
-      <h3>Hablemos de tu requerimiento</h3>
-      <p>Atendemos importadores, distribuidores y marcas de todo el mundo. Cuéntanos tu volumen, variedad preferida y destino, y te enviamos una propuesta comercial en menos de 24 horas.</p>
+      <h3 data-i18n="contact.h3">Hablemos de tu requerimiento</h3>
+      <p data-i18n="contact.p">Atendemos importadores, distribuidores y marcas de todo el mundo. Cuéntanos tu volumen, variedad preferida y destino, y te enviamos una propuesta comercial en menos de 24 horas.</p>
 
       <div class="contact-detail">
         <div class="contact-detail-icon">📍</div>
         <div class="contact-detail-text">
-          <small>Ubicación</small>
-          <p>Ayacucho, Perú</p>
+          <small data-i18n="contact.loc">Ubicación</small>
+          <p data-i18n="contact.loc.v">Ayacucho, Perú</p>
         </div>
       </div>
 
       <div class="contact-detail">
         <div class="contact-detail-icon">📱</div>
         <div class="contact-detail-text">
-          <small>WhatsApp / Teléfono</small>
+          <small data-i18n="contact.phone">WhatsApp / Teléfono</small>
           <p>+51 XXX XXX XXX</p>
         </div>
       </div>
@@ -1024,7 +1052,7 @@
       <div class="contact-detail">
         <div class="contact-detail-icon">✉️</div>
         <div class="contact-detail-text">
-          <small>Correo electrónico</small>
+          <small data-i18n="contact.mail">Correo electrónico</small>
           <p>contacto@sierralinda.pe</p>
         </div>
       </div>
@@ -1032,86 +1060,86 @@
       <div class="contact-detail">
         <div class="contact-detail-icon">🌐</div>
         <div class="contact-detail-text">
-          <small>Mercados destino</small>
-          <p>EE.UU., Europa, Asia, Oceanía</p>
+          <small data-i18n="contact.markets">Mercados destino</small>
+          <p data-i18n="contact.markets.v">EE.UU., Europa, Asia, Oceanía</p>
         </div>
       </div>
 
       <div style="margin-top:2rem;padding:1.5rem;background:var(--verde-dark);color:var(--crema)">
-        <div style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--oro-light);margin-bottom:0.8rem">Próximamente también</div>
-        <p style="font-size:0.9rem;line-height:1.7;color:rgba(245,237,216,0.8)">☕ <strong>Café ayacuchano</strong> de altura<br>🍫 <strong>Cocoa</strong> de origen peruano</p>
+        <div style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--oro-light);margin-bottom:0.8rem" data-i18n="contact.soon.t">Próximamente también</div>
+        <p style="font-size:0.9rem;line-height:1.7;color:rgba(245,237,216,0.8)" data-i18n="contact.soon.p">☕ <strong>Café ayacuchano</strong> de altura<br>🍫 <strong>Cocoa</strong> de origen peruano</p>
       </div>
     </div>
 
     <div class="contact-form reveal">
-      <div class="form-title">📋 Solicitud de cotización</div>
+      <div class="form-title" data-i18n="form.title">📋 Solicitud de cotización</div>
 
       <div class="form-row">
         <div class="form-group">
-          <label>Nombre completo *</label>
-          <input type="text" id="f-nombre" placeholder="Tu nombre">
+          <label data-i18n="form.nombre">Nombre completo *</label>
+          <input type="text" id="f-nombre" placeholder="Tu nombre" data-i18n-ph="form.nombre.ph">
         </div>
         <div class="form-group">
-          <label>Empresa</label>
-          <input type="text" id="f-empresa" placeholder="Nombre de tu empresa">
+          <label data-i18n="form.empresa">Empresa</label>
+          <input type="text" id="f-empresa" placeholder="Nombre de tu empresa" data-i18n-ph="form.empresa.ph">
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group">
-          <label>País de destino *</label>
-          <input type="text" id="f-pais" placeholder="Ej: España, EE.UU.">
+          <label data-i18n="form.pais">País de destino *</label>
+          <input type="text" id="f-pais" placeholder="Ej: España, EE.UU." data-i18n-ph="form.pais.ph">
         </div>
         <div class="form-group">
-          <label>Teléfono / WhatsApp</label>
+          <label data-i18n="form.tel">Teléfono / WhatsApp</label>
           <input type="text" id="f-telefono" placeholder="+1 XXX XXX XXXX">
         </div>
       </div>
 
       <div class="form-group">
-        <label>Variedad de quinua *</label>
+        <label data-i18n="form.variedad">Variedad de quinua *</label>
         <select id="f-variedad">
-          <option value="">— Selecciona una variedad —</option>
-          <option value="Quinua Blanca Real">🟡 Quinua Blanca Real</option>
-          <option value="Quinua Roja">🔴 Quinua Roja</option>
-          <option value="Quinua Negra Premium">⚫ Quinua Negra Premium</option>
-          <option value="Mix Tri-color (Blanca + Roja + Negra)">🎨 Mix Tri-color (Blanca + Roja + Negra)</option>
-          <option value="Todas las variedades - cotizar por lote">📦 Todas las variedades</option>
+          <option value="" data-i18n="form.variedad.o0">— Selecciona una variedad —</option>
+          <option value="Quinua Blanca Real" data-i18n="form.variedad.o1">🟡 Quinua Blanca Real</option>
+          <option value="Quinua Roja" data-i18n="form.variedad.o2">🔴 Quinua Roja</option>
+          <option value="Quinua Negra Premium" data-i18n="form.variedad.o3">⚫ Quinua Negra Premium</option>
+          <option value="Mix Tri-color (Blanca + Roja + Negra)" data-i18n="form.variedad.o4">🎨 Mix Tri-color (Blanca + Roja + Negra)</option>
+          <option value="Todas las variedades - cotizar por lote" data-i18n="form.variedad.o5">📦 Todas las variedades</option>
         </select>
       </div>
 
       <div class="form-row">
         <div class="form-group">
-          <label>Volumen requerido (TM) *</label>
+          <label data-i18n="form.volumen">Volumen requerido (TM) *</label>
           <select id="f-volumen">
-            <option value="">— Selecciona —</option>
-            <option value="1 a 5 TM">1 a 5 TM</option>
-            <option value="5 a 20 TM">5 a 20 TM</option>
-            <option value="20 a 50 TM">20 a 50 TM</option>
-            <option value="más de 50 TM">Más de 50 TM</option>
+            <option value="" data-i18n="form.volumen.o0">— Selecciona —</option>
+            <option value="1 a 5 TM" data-i18n="form.volumen.o1">1 a 5 TM</option>
+            <option value="5 a 20 TM" data-i18n="form.volumen.o2">5 a 20 TM</option>
+            <option value="20 a 50 TM" data-i18n="form.volumen.o3">20 a 50 TM</option>
+            <option value="más de 50 TM" data-i18n="form.volumen.o4">Más de 50 TM</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Tipo de certificación</label>
+          <label data-i18n="form.cert">Tipo de certificación</label>
           <select id="f-cert">
-            <option value="">— Opcional —</option>
-            <option value="Convencional">Convencional</option>
-            <option value="Orgánica certificada">Orgánica certificada</option>
-            <option value="Libre de gluten">Libre de gluten</option>
-            <option value="Orgánica + Gluten Free">Orgánica + Gluten Free</option>
+            <option value="" data-i18n="form.cert.o0">— Opcional —</option>
+            <option value="Convencional" data-i18n="form.cert.o1">Convencional</option>
+            <option value="Orgánica certificada" data-i18n="form.cert.o2">Orgánica certificada</option>
+            <option value="Libre de gluten" data-i18n="form.cert.o3">Libre de gluten</option>
+            <option value="Orgánica + Gluten Free" data-i18n="form.cert.o4">Orgánica + Gluten Free</option>
           </select>
         </div>
       </div>
 
       <div class="form-group">
-        <label>Mensaje adicional</label>
-        <textarea id="f-mensaje" placeholder="Cuéntanos más sobre tu requerimiento: frecuencia de compra, condiciones de pago, incoterm preferido, etc."></textarea>
+        <label data-i18n="form.msg">Mensaje adicional</label>
+        <textarea id="f-mensaje" placeholder="Cuéntanos más sobre tu requerimiento: frecuencia de compra, condiciones de pago, incoterm preferido, etc." data-i18n-ph="form.msg.ph"></textarea>
       </div>
 
-      <button class="btn-whatsapp" onclick="enviarCotizacion()">
+      <button class="btn-whatsapp" onclick="enviarCotizacion()" data-i18n="form.btn">
         📱 Enviar cotización por WhatsApp
       </button>
-      <p class="whatsapp-note">Se abrirá WhatsApp con tu mensaje pre-completado. Respondemos en menos de 24h.</p>
+      <p class="whatsapp-note" data-i18n="form.note">Se abrirá WhatsApp con tu mensaje pre-completado. Respondemos en menos de 24h.</p>
     </div>
   </div>
 </section>
@@ -1121,53 +1149,410 @@
   <div class="footer-grid">
     <div>
       <div class="footer-brand-name">Sierra <span>Linda</span></div>
-      <p class="footer-desc">Exportadora peruana de quinua premium desde Ayacucho. Comprometidos con la calidad, la trazabilidad y el desarrollo de las comunidades andinas.</p>
+      <p class="footer-desc" data-i18n="footer.desc">Exportadora peruana de quinua premium desde Ayacucho. Comprometidos con la calidad, la trazabilidad y el desarrollo de las comunidades andinas.</p>
     </div>
     <div class="footer-col">
-      <h5>Navegación</h5>
+      <h5 data-i18n="footer.nav">Navegación</h5>
       <ul>
-        <li><a href="#nosotros">Quiénes somos</a></li>
-        <li><a href="#proceso">Proceso</a></li>
-        <li><a href="#productos">Productos</a></li>
-        <li><a href="#certificaciones">Certificaciones</a></li>
-        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#nosotros" data-i18n="about.eyebrow">Quiénes somos</a></li>
+        <li><a href="#proceso" data-i18n="nav.proceso">Proceso</a></li>
+        <li><a href="#productos" data-i18n="nav.productos">Productos</a></li>
+        <li><a href="#certificaciones" data-i18n="nav.cert">Certificaciones</a></li>
+        <li><a href="#contacto" data-i18n="nav.contacto">Contacto</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h5>Productos</h5>
+      <h5 data-i18n="footer.products">Productos</h5>
       <ul>
-        <li><a href="#productos">Quinua Blanca</a></li>
-        <li><a href="#productos">Quinua Roja</a></li>
-        <li><a href="#productos">Quinua Negra</a></li>
-        <li><a href="#productos">Mix Tri-color</a></li>
+        <li><a href="#productos" data-i18n="footer.p1">Quinua Blanca</a></li>
+        <li><a href="#productos" data-i18n="footer.p2">Quinua Roja</a></li>
+        <li><a href="#productos" data-i18n="footer.p3">Quinua Negra</a></li>
+        <li><a href="#productos" data-i18n="footer.p4">Mix Tri-color</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h5>Contacto</h5>
+      <h5 data-i18n="footer.contact">Contacto</h5>
       <ul>
-        <li><a href="#">Ayacucho, Perú</a></li>
+        <li><a href="#" data-i18n="contact.loc.v">Ayacucho, Perú</a></li>
         <li><a href="mailto:contacto@sierralinda.pe">contacto@sierralinda.pe</a></li>
         <li><a href="https://wa.me/51XXXXXXXXX" target="_blank">WhatsApp</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 Sierra Linda S.A.C. — Ayacucho, Perú. Todos los derechos reservados.</span>
-    <span>Desarrollado con 🌾 para el mercado global</span>
+    <span data-i18n="footer.copy">© 2026 Sierra Linda S.A.C. — Ayacucho, Perú. Todos los derechos reservados.</span>
+    <span data-i18n="footer.made">Desarrollado con 🌾 para el mercado global</span>
   </div>
 </footer>
 
 <script>
+  // ══════════════ TRADUCCIONES ES / EN ══════════════
+  const I18N = {
+    es: {
+      'meta.title': 'Sierra Linda | Exportadora de Quinua Ayacucho, Perú',
+      // Navegación
+      'nav.nosotros': 'Nosotros',
+      'nav.proceso': 'Proceso',
+      'nav.productos': 'Productos',
+      'nav.cert': 'Certificaciones',
+      'nav.contacto': 'Contacto',
+      'nav.cta': 'Cotizar ahora',
+      // Hero
+      'hero.eyebrow': 'Ayacucho · Perú · Desde los Andes',
+      'hero.title': 'Quinua peruana<br>de <em>alta pureza</em><br>para el mundo',
+      'hero.subtitle': 'Sierra Linda es una empresa ayacuchana comprometida con la exportación de quinua premium en sus tres variedades, llevando lo mejor de los Andes peruanos a los mercados internacionales.',
+      'hero.btn1': 'Ver nuestros productos',
+      'hero.btn2': 'Solicitar cotización',
+      'hero.badge': 'Quinua Ayacuchana',
+      // Quiénes somos
+      'about.eyebrow': 'Quiénes somos',
+      'about.title': 'Raíces andinas,<br>proyección global',
+      'about.p1': 'Sierra Linda nació en Ayacucho, el corazón de los Andes peruanos, con una misión clara: llevar la quinua de mejor calidad a los mercados internacionales más exigentes. Trabajamos directamente con agricultores locales para asegurar trazabilidad, calidad y desarrollo sostenible en cada lote.',
+      'about.p2': 'Nuestra empresa combina el conocimiento ancestral del cultivo de quinua con estándares modernos de procesamiento y exportación, garantizando un producto que cumple con los requisitos de mercados de Estados Unidos, Europa y Asia.',
+      'about.mision.t': '🎯 Misión',
+      'about.mision.p': 'Exportar quinua ayacuchana de alta calidad, conectando a los agricultores andinos con mercados internacionales, generando valor económico y social en nuestra región.',
+      'about.vision.t': '🔭 Visión',
+      'about.vision.p': 'Ser el referente peruano de exportación de superalimentos andinos para el 2030, reconocidos globalmente por nuestra calidad, trazabilidad y compromiso con el desarrollo sostenible.',
+      'about.quote': '"Del campo ayacuchano a la mesa del mundo"',
+      // Proceso
+      'proc.eyebrow': 'Nuestro proceso',
+      'proc.title': 'De la sierra al<br>mercado internacional',
+      'proc.s1.t': 'Cultivo',
+      'proc.s1.p': 'Trabajamos con agricultores de Ayacucho, cultivando quinua a más de 3,000 m.s.n.m. bajo prácticas sostenibles y libres de pesticidas.',
+      'proc.s2.t': 'Cosecha',
+      'proc.s2.p': 'Recolección manual en el momento óptimo de madurez para preservar el perfil nutricional completo de cada variedad.',
+      'proc.s3.t': 'Procesamiento',
+      'proc.s3.p': 'Selección, limpieza y escarificación en planta especializada. Control de calidad en cada etapa bajo normas internacionales.',
+      'proc.s4.t': 'Empaque',
+      'proc.s4.p': 'Empaque en sacos de 25 kg, 50 kg y a granel, con etiquetado según normativa del país de destino.',
+      'proc.s5.t': 'Exportación',
+      'proc.s5.p': 'Gestión logística completa: documentación, certificados fitosanitarios y coordinación con operadores de carga internacional.',
+      // Productos
+      'prod.eyebrow': 'Nuestros productos',
+      'prod.title': 'Quinua en sus tres<br>variedades premium',
+      'prod.intro': 'Ofrecemos las tres variedades más demandadas del mercado internacional, cultivadas en las alturas de Ayacucho y procesadas bajo estándares de exportación. Selecciona una variedad para conocer su perfil nutricional completo.',
+      'prod.tab.blanca': '🟡 Quinua Blanca',
+      'prod.tab.roja': '🔴 Quinua Roja',
+      'prod.tab.negra': '⚫ Quinua Negra',
+      'prod.cotizar': 'Cotizar esta variedad',
+      'nutri.per100': 'por 100g',
+      'nutri.prot': 'Proteínas',
+      'nutri.carb': 'Carbohidratos',
+      'nutri.fat': 'Grasas buenas',
+      't.energia': '🔥 Energía',
+      't.fibra': '🌾 Fibra dietética',
+      't.humedad': '💧 Humedad máx.',
+      't.hierro': '⚡ Hierro',
+      't.calcio': '🦴 Calcio',
+      't.magnesio': '🧠 Magnesio',
+      't.antiox': '🛡️ Antioxidantes',
+      't.saponinas': '✅ Saponinas',
+      't.gluten': '🌱 Libre de gluten',
+      't.present': '📦 Presentación',
+      'v.saponinas': '≤ 0.06% (lavada)',
+      'v.natural': 'Naturalmente',
+      'v.present': 'Sacos 25 kg / 50 kg / granel',
+      'origin.h': '🏔️ Origen andino',
+      'img.note': 'Reemplaza esta sección con imagen real',
+      'b.badge': 'Variedad Blanca / Pearl',
+      'b.name': 'Quinua Blanca<br>Real de Ayacucho',
+      'b.desc': 'La variedad más cultivada y exportada del Perú. De sabor suave y textura esponjosa, es la preferida por la industria alimentaria internacional. Ideal para sopas, ensaladas, barras energéticas y harinas especiales. Alta demanda en EE.UU., Europa y Japón.',
+      'b.img': 'Quinua Blanca Real',
+      'b.origin': 'Cultivada en las alturas de Ayacucho (3,200 – 3,800 m.s.n.m.). Trazabilidad completa desde el agricultor hasta el contenedor.',
+      'r.badge': 'Variedad Roja / Red',
+      'r.name': 'Quinua Roja<br>de Ayacucho',
+      'r.desc': 'Variedad de alto valor en el mercado de salud y bienestar. Su color rojo intenso proviene de betalaínas y antioxidantes naturales. Textura más firme que la blanca, ideal para ensaladas gourmet, snacks saludables y mezclas tri-color. Perfil nutricional superior en minerales.',
+      'r.antiox': 'Alto (betalaínas)',
+      'r.img': 'Quinua Roja',
+      'r.origin': 'Cultivada en zonas específicas de Ayacucho con condiciones climáticas ideales para el desarrollo del pigmento natural. Mayor contenido de antioxidantes por las condiciones de altitud y radiación UV.',
+      'n.badge': 'Variedad Negra / Black',
+      'n.name': 'Quinua Negra<br>de Ayacucho',
+      'n.desc': 'La variedad más exclusiva y de mayor valor en el mercado premium. Rica en antocianinas —antioxidantes asociados a beneficios cardiovasculares— y con el perfil proteico más alto. Textura crujiente única, ideal para mercados gourmet y productos funcionales de alto valor agregado.',
+      'n.antiox': 'Muy alto (antocianinas)',
+      'n.img': 'Quinua Negra Premium',
+      'n.origin': 'La variedad más escasa y cotizada. Cultivada en microclimas específicos de Ayacucho. Producción limitada que garantiza exclusividad y mayor precio por tonelada en mercados gourmet europeos y asiáticos.',
+      // Certificaciones
+      'cert.eyebrow': 'Certificaciones',
+      'cert.title': 'Comprometidos con los<br>estándares internacionales',
+      'cert.status': 'En proceso',
+      'cert.c1.t': 'Certificación Orgánica',
+      'cert.c1.p': 'NOP (USDA) y EU Organic para acceder a los mercados de Estados Unidos y Europa.',
+      'cert.c2.p': 'Sistema de análisis de peligros y puntos de control crítico en toda la cadena de procesamiento.',
+      'cert.c3.t': 'Libre de Gluten',
+      'cert.c3.p': 'Certificación Gluten Free para atender la demanda de consumidores celíacos y mercados de salud.',
+      'cert.c4.t': 'Fitosanitario SENASA',
+      'cert.c4.p': 'Certificado fitosanitario emitido por SENASA Perú, requisito para cada embarque de exportación.',
+      'cert.note': '🌾 Actualmente nos encontramos en proceso de obtención de nuestras certificaciones internacionales. Esta sección se actualizará con los sellos oficiales a medida que sean otorgados.',
+      // Contacto
+      'contact.eyebrow': 'Cotizaciones',
+      'contact.title': '¿Interesado en importar<br>quinua peruana?',
+      'contact.h3': 'Hablemos de tu requerimiento',
+      'contact.p': 'Atendemos importadores, distribuidores y marcas de todo el mundo. Cuéntanos tu volumen, variedad preferida y destino, y te enviamos una propuesta comercial en menos de 24 horas.',
+      'contact.loc': 'Ubicación',
+      'contact.loc.v': 'Ayacucho, Perú',
+      'contact.phone': 'WhatsApp / Teléfono',
+      'contact.mail': 'Correo electrónico',
+      'contact.markets': 'Mercados destino',
+      'contact.markets.v': 'EE.UU., Europa, Asia, Oceanía',
+      'contact.soon.t': 'Próximamente también',
+      'contact.soon.p': '☕ <strong>Café ayacuchano</strong> de altura<br>🍫 <strong>Cocoa</strong> de origen peruano',
+      // Formulario
+      'form.title': '📋 Solicitud de cotización',
+      'form.nombre': 'Nombre completo *',
+      'form.nombre.ph': 'Tu nombre',
+      'form.empresa': 'Empresa',
+      'form.empresa.ph': 'Nombre de tu empresa',
+      'form.pais': 'País de destino *',
+      'form.pais.ph': 'Ej: España, EE.UU.',
+      'form.tel': 'Teléfono / WhatsApp',
+      'form.variedad': 'Variedad de quinua *',
+      'form.variedad.o0': '— Selecciona una variedad —',
+      'form.variedad.o1': '🟡 Quinua Blanca Real',
+      'form.variedad.o2': '🔴 Quinua Roja',
+      'form.variedad.o3': '⚫ Quinua Negra Premium',
+      'form.variedad.o4': '🎨 Mix Tri-color (Blanca + Roja + Negra)',
+      'form.variedad.o5': '📦 Todas las variedades',
+      'form.volumen': 'Volumen requerido (TM) *',
+      'form.volumen.o0': '— Selecciona —',
+      'form.volumen.o1': '1 a 5 TM',
+      'form.volumen.o2': '5 a 20 TM',
+      'form.volumen.o3': '20 a 50 TM',
+      'form.volumen.o4': 'Más de 50 TM',
+      'form.cert': 'Tipo de certificación',
+      'form.cert.o0': '— Opcional —',
+      'form.cert.o1': 'Convencional',
+      'form.cert.o2': 'Orgánica certificada',
+      'form.cert.o3': 'Libre de gluten',
+      'form.cert.o4': 'Orgánica + Gluten Free',
+      'form.msg': 'Mensaje adicional',
+      'form.msg.ph': 'Cuéntanos más sobre tu requerimiento: frecuencia de compra, condiciones de pago, incoterm preferido, etc.',
+      'form.btn': '📱 Enviar cotización por WhatsApp',
+      'form.note': 'Se abrirá WhatsApp con tu mensaje pre-completado. Respondemos en menos de 24h.',
+      'form.alert': 'Por favor, completa los campos obligatorios: nombre, país, variedad y volumen.',
+      // Footer
+      'footer.desc': 'Exportadora peruana de quinua premium desde Ayacucho. Comprometidos con la calidad, la trazabilidad y el desarrollo de las comunidades andinas.',
+      'footer.nav': 'Navegación',
+      'footer.products': 'Productos',
+      'footer.contact': 'Contacto',
+      'footer.p1': 'Quinua Blanca',
+      'footer.p2': 'Quinua Roja',
+      'footer.p3': 'Quinua Negra',
+      'footer.p4': 'Mix Tri-color',
+      'footer.copy': '© 2026 Sierra Linda S.A.C. — Ayacucho, Perú. Todos los derechos reservados.',
+      'footer.made': 'Desarrollado con 🌾 para el mercado global',
+      // WhatsApp
+      'wa.header': '🌾 *Solicitud de cotización - Sierra Linda*',
+      'wa.nombre': '👤 *Nombre:*',
+      'wa.empresa': '🏢 *Empresa:*',
+      'wa.pais': '🌍 *País destino:*',
+      'wa.tel': '📞 *Teléfono:*',
+      'wa.variedad': '🌾 *Variedad solicitada:*',
+      'wa.volumen': '📦 *Volumen requerido:*',
+      'wa.cert': '✅ *Certificación:*',
+      'wa.msg': '💬 *Mensaje adicional:*'
+    },
+    en: {
+      'meta.title': 'Sierra Linda | Quinoa Exporter from Ayacucho, Peru',
+      // Navigation
+      'nav.nosotros': 'About Us',
+      'nav.proceso': 'Process',
+      'nav.productos': 'Products',
+      'nav.cert': 'Certifications',
+      'nav.contacto': 'Contact',
+      'nav.cta': 'Get a Quote',
+      // Hero
+      'hero.eyebrow': 'Ayacucho · Peru · From the Andes',
+      'hero.title': 'High-purity<br><em>Peruvian quinoa</em><br>for the world',
+      'hero.subtitle': 'Sierra Linda is a company from Ayacucho committed to exporting premium quinoa in its three varieties, bringing the best of the Peruvian Andes to international markets.',
+      'hero.btn1': 'View our products',
+      'hero.btn2': 'Request a quote',
+      'hero.badge': 'Ayacucho Quinoa',
+      // About Us
+      'about.eyebrow': 'About Us',
+      'about.title': 'Andean roots,<br>global reach',
+      'about.p1': 'Sierra Linda was born in Ayacucho, the heart of the Peruvian Andes, with a clear mission: to bring the highest quality quinoa to the most demanding international markets. We work directly with local farmers to ensure traceability, quality, and sustainable development in every batch.',
+      'about.p2': 'Our company combines ancestral knowledge of quinoa farming with modern processing and export standards, guaranteeing a product that meets the requirements of markets in the United States, Europe, and Asia.',
+      'about.mision.t': '🎯 Mission',
+      'about.mision.p': 'To export high-quality quinoa from Ayacucho, connecting Andean farmers with international markets and generating economic and social value in our region.',
+      'about.vision.t': '🔭 Vision',
+      'about.vision.p': 'To become Peru\'s leading exporter of Andean superfoods by 2030, globally recognized for our quality, traceability, and commitment to sustainable development.',
+      'about.quote': '"From the fields of Ayacucho to the world\'s table"',
+      // Process
+      'proc.eyebrow': 'Our process',
+      'proc.title': 'From the highlands to<br>the international market',
+      'proc.s1.t': 'Farming',
+      'proc.s1.p': 'We work with farmers in Ayacucho, growing quinoa at over 3,000 meters above sea level using sustainable, pesticide-free practices.',
+      'proc.s2.t': 'Harvest',
+      'proc.s2.p': 'Manual harvesting at the optimal point of maturity to preserve the complete nutritional profile of each variety.',
+      'proc.s3.t': 'Processing',
+      'proc.s3.p': 'Sorting, cleaning, and scarification at a specialized facility. Quality control at every stage under international standards.',
+      'proc.s4.t': 'Packing',
+      'proc.s4.p': 'Packed in 25 kg and 50 kg sacks or in bulk, labeled according to the regulations of the destination country.',
+      'proc.s5.t': 'Export',
+      'proc.s5.p': 'Complete logistics management: documentation, phytosanitary certificates, and coordination with international freight operators.',
+      // Products
+      'prod.eyebrow': 'Our products',
+      'prod.title': 'Quinoa in its three<br>premium varieties',
+      'prod.intro': 'We offer the three most in-demand varieties on the international market, grown in the highlands of Ayacucho and processed under export standards. Select a variety to see its complete nutritional profile.',
+      'prod.tab.blanca': '🟡 White Quinoa',
+      'prod.tab.roja': '🔴 Red Quinoa',
+      'prod.tab.negra': '⚫ Black Quinoa',
+      'prod.cotizar': 'Request a quote for this variety',
+      'nutri.per100': 'per 100g',
+      'nutri.prot': 'Protein',
+      'nutri.carb': 'Carbohydrates',
+      'nutri.fat': 'Healthy fats',
+      't.energia': '🔥 Energy',
+      't.fibra': '🌾 Dietary fiber',
+      't.humedad': '💧 Max. moisture',
+      't.hierro': '⚡ Iron',
+      't.calcio': '🦴 Calcium',
+      't.magnesio': '🧠 Magnesium',
+      't.antiox': '🛡️ Antioxidants',
+      't.saponinas': '✅ Saponins',
+      't.gluten': '🌱 Gluten free',
+      't.present': '📦 Packaging',
+      'v.saponinas': '≤ 0.06% (washed)',
+      'v.natural': 'Naturally',
+      'v.present': '25 kg / 50 kg sacks / bulk',
+      'origin.h': '🏔️ Andean origin',
+      'img.note': 'Replace this section with a real photo',
+      'b.badge': 'White Variety / Pearl',
+      'b.name': 'Royal White Quinoa<br>from Ayacucho',
+      'b.desc': 'The most widely grown and exported variety in Peru. With its mild flavor and fluffy texture, it is the favorite of the international food industry. Ideal for soups, salads, energy bars, and specialty flours. High demand in the US, Europe, and Japan.',
+      'b.img': 'Royal White Quinoa',
+      'b.origin': 'Grown in the highlands of Ayacucho (3,200 – 3,800 m above sea level). Full traceability from the farmer to the container.',
+      'r.badge': 'Red Variety',
+      'r.name': 'Red Quinoa<br>from Ayacucho',
+      'r.desc': 'A high-value variety in the health and wellness market. Its intense red color comes from betalains and natural antioxidants. Firmer texture than white quinoa, ideal for gourmet salads, healthy snacks, and tri-color blends. Superior mineral profile.',
+      'r.antiox': 'High (betalains)',
+      'r.img': 'Red Quinoa',
+      'r.origin': 'Grown in specific areas of Ayacucho with ideal climate conditions for developing its natural pigment. Higher antioxidant content thanks to the altitude and UV exposure.',
+      'n.badge': 'Black Variety',
+      'n.name': 'Black Quinoa<br>from Ayacucho',
+      'n.desc': 'The most exclusive and highest-value variety in the premium market. Rich in anthocyanins — antioxidants associated with cardiovascular benefits — and with the highest protein profile. Its unique crunchy texture makes it ideal for gourmet markets and high-value functional products.',
+      'n.antiox': 'Very high (anthocyanins)',
+      'n.img': 'Premium Black Quinoa',
+      'n.origin': 'The scarcest and most sought-after variety. Grown in specific microclimates of Ayacucho. Limited production guarantees exclusivity and a higher price per ton in European and Asian gourmet markets.',
+      // Certifications
+      'cert.eyebrow': 'Certifications',
+      'cert.title': 'Committed to<br>international standards',
+      'cert.status': 'In progress',
+      'cert.c1.t': 'Organic Certification',
+      'cert.c1.p': 'NOP (USDA) and EU Organic to access the United States and European markets.',
+      'cert.c2.p': 'Hazard analysis and critical control point system across the entire processing chain.',
+      'cert.c3.t': 'Gluten Free',
+      'cert.c3.p': 'Gluten Free certification to serve celiac consumers and health-focused markets.',
+      'cert.c4.t': 'SENASA Phytosanitary',
+      'cert.c4.p': 'Phytosanitary certificate issued by SENASA Peru, required for every export shipment.',
+      'cert.note': '🌾 We are currently in the process of obtaining our international certifications. This section will be updated with the official seals as they are granted.',
+      // Contact
+      'contact.eyebrow': 'Quotes',
+      'contact.title': 'Interested in importing<br>Peruvian quinoa?',
+      'contact.h3': 'Let\'s talk about your requirements',
+      'contact.p': 'We serve importers, distributors, and brands worldwide. Tell us your volume, preferred variety, and destination, and we\'ll send you a commercial proposal within 24 hours.',
+      'contact.loc': 'Location',
+      'contact.loc.v': 'Ayacucho, Peru',
+      'contact.phone': 'WhatsApp / Phone',
+      'contact.mail': 'Email',
+      'contact.markets': 'Destination markets',
+      'contact.markets.v': 'USA, Europe, Asia, Oceania',
+      'contact.soon.t': 'Coming soon',
+      'contact.soon.p': '☕ High-altitude <strong>Ayacucho coffee</strong><br>🍫 Peruvian-origin <strong>cocoa</strong>',
+      // Form
+      'form.title': '📋 Quote request',
+      'form.nombre': 'Full name *',
+      'form.nombre.ph': 'Your name',
+      'form.empresa': 'Company',
+      'form.empresa.ph': 'Your company name',
+      'form.pais': 'Destination country *',
+      'form.pais.ph': 'E.g.: Spain, USA',
+      'form.tel': 'Phone / WhatsApp',
+      'form.variedad': 'Quinoa variety *',
+      'form.variedad.o0': '— Select a variety —',
+      'form.variedad.o1': '🟡 Royal White Quinoa',
+      'form.variedad.o2': '🔴 Red Quinoa',
+      'form.variedad.o3': '⚫ Premium Black Quinoa',
+      'form.variedad.o4': '🎨 Tri-color Mix (White + Red + Black)',
+      'form.variedad.o5': '📦 All varieties',
+      'form.volumen': 'Required volume (MT) *',
+      'form.volumen.o0': '— Select —',
+      'form.volumen.o1': '1 to 5 MT',
+      'form.volumen.o2': '5 to 20 MT',
+      'form.volumen.o3': '20 to 50 MT',
+      'form.volumen.o4': 'More than 50 MT',
+      'form.cert': 'Certification type',
+      'form.cert.o0': '— Optional —',
+      'form.cert.o1': 'Conventional',
+      'form.cert.o2': 'Certified organic',
+      'form.cert.o3': 'Gluten free',
+      'form.cert.o4': 'Organic + Gluten Free',
+      'form.msg': 'Additional message',
+      'form.msg.ph': 'Tell us more about your requirements: purchase frequency, payment terms, preferred incoterm, etc.',
+      'form.btn': '📱 Send quote request via WhatsApp',
+      'form.note': 'WhatsApp will open with your message pre-filled. We reply within 24h.',
+      'form.alert': 'Please complete the required fields: name, country, variety, and volume.',
+      // Footer
+      'footer.desc': 'Peruvian exporter of premium quinoa from Ayacucho. Committed to quality, traceability, and the development of Andean communities.',
+      'footer.nav': 'Navigation',
+      'footer.products': 'Products',
+      'footer.contact': 'Contact',
+      'footer.p1': 'White Quinoa',
+      'footer.p2': 'Red Quinoa',
+      'footer.p3': 'Black Quinoa',
+      'footer.p4': 'Tri-color Mix',
+      'footer.copy': '© 2026 Sierra Linda S.A.C. — Ayacucho, Peru. All rights reserved.',
+      'footer.made': 'Developed with 🌾 for the global market',
+      // WhatsApp
+      'wa.header': '🌾 *Quote request - Sierra Linda*',
+      'wa.nombre': '👤 *Name:*',
+      'wa.empresa': '🏢 *Company:*',
+      'wa.pais': '🌍 *Destination country:*',
+      'wa.tel': '📞 *Phone:*',
+      'wa.variedad': '🌾 *Requested variety:*',
+      'wa.volumen': '📦 *Required volume:*',
+      'wa.cert': '✅ *Certification:*',
+      'wa.msg': '💬 *Additional message:*'
+    }
+  };
+
+  let currentLang = localStorage.getItem('sl-lang') || 'es';
+
+  function setLang(lang) {
+    currentLang = lang;
+    localStorage.setItem('sl-lang', lang);
+    document.documentElement.lang = lang;
+    document.title = I18N[lang]['meta.title'];
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (I18N[lang][key] !== undefined) el.innerHTML = I18N[lang][key];
+    });
+
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      const key = el.dataset.i18nPh;
+      if (I18N[lang][key] !== undefined) el.placeholder = I18N[lang][key];
+    });
+
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+  }
+
+  // Aplicar idioma guardado al cargar
+  if (currentLang !== 'es') setLang(currentLang);
+
   // TABS - Variedades de quinua
-  function showTab(id) {
+  function showTab(id, btn) {
     document.querySelectorAll('.quinua-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('tab-' + id).classList.add('active');
-    event.currentTarget.classList.add('active');
+    btn.classList.add('active');
   }
 
   // COTIZACIÓN POR WHATSAPP
   function enviarCotizacion() {
+    const t = I18N[currentLang];
     const nombre   = document.getElementById('f-nombre').value.trim();
     const empresa  = document.getElementById('f-empresa').value.trim();
     const pais     = document.getElementById('f-pais').value.trim();
@@ -1178,19 +1563,19 @@
     const mensaje  = document.getElementById('f-mensaje').value.trim();
 
     if (!nombre || !pais || !variedad || !volumen) {
-      alert('Por favor, completa los campos obligatorios: nombre, país, variedad y volumen.');
+      alert(t['form.alert']);
       return;
     }
 
-    let texto = `🌾 *Solicitud de cotización - Sierra Linda*\n\n`;
-    texto += `👤 *Nombre:* ${nombre}\n`;
-    if (empresa) texto += `🏢 *Empresa:* ${empresa}\n`;
-    texto += `🌍 *País destino:* ${pais}\n`;
-    if (telefono) texto += `📞 *Teléfono:* ${telefono}\n`;
-    texto += `\n🌾 *Variedad solicitada:* ${variedad}\n`;
-    texto += `📦 *Volumen requerido:* ${volumen}\n`;
-    if (cert) texto += `✅ *Certificación:* ${cert}\n`;
-    if (mensaje) texto += `\n💬 *Mensaje adicional:*\n${mensaje}`;
+    let texto = `${t['wa.header']}\n\n`;
+    texto += `${t['wa.nombre']} ${nombre}\n`;
+    if (empresa) texto += `${t['wa.empresa']} ${empresa}\n`;
+    texto += `${t['wa.pais']} ${pais}\n`;
+    if (telefono) texto += `${t['wa.tel']} ${telefono}\n`;
+    texto += `\n${t['wa.variedad']} ${variedad}\n`;
+    texto += `${t['wa.volumen']} ${volumen}\n`;
+    if (cert) texto += `${t['wa.cert']} ${cert}\n`;
+    if (mensaje) texto += `\n${t['wa.msg']}\n${mensaje}`;
 
     // REEMPLAZA con el número real de WhatsApp de Sierra Linda
     const numeroWA = '51XXXXXXXXX';
