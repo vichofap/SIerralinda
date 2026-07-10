@@ -1,0 +1,15 @@
+{
+  "name": "bot-whatsapp-danaosth",
+  "version": "1.0.0",
+  "description": "Bot de WhatsApp para la tienda danaosth: responde a los clientes con Claude mientras la dueña transmite en TikTok",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.71.0",
+    "dotenv": "^16.4.5",
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.26.0"
+  }
+}
